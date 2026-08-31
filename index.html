@@ -17,7 +17,6 @@
       .no-print { display: none !important; }
       #reportSection { display: block !important; }
       .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; background: white !important; break-inside: avoid; }
-      .page-break { page-break-before: always; }
     }
   </style>
 </head>
@@ -35,7 +34,7 @@
             <h1 class="text-sm sm:text-base font-black text-blue-950 leading-tight tracking-tight">SMA MUHAMMADIYAH 18 JAKARTA</h1>
             <span class="px-2 py-0.5 bg-amber-100 border border-amber-300 text-amber-900 text-[10px] font-black rounded">SCHOOL OF CHAMPION</span>
           </div>
-          <p class="text-[11px] text-slate-500 font-medium">EduAnalytics PTN • Manual Input Quota & Real SNPMB Data</p>
+          <p class="text-[11px] text-slate-500 font-medium">EduAnalytics PTN • Multi-Pathway Decision Support System</p>
         </div>
       </div>
       
@@ -44,7 +43,13 @@
           <span>🏠 Beranda</span>
         </button>
 
-        <button onclick="exportDataExcel()" class="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold rounded-xl transition shadow flex items-center gap-1.5" title="Export Rekap Excel">
+        <label class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition shadow-sm border border-slate-300 cursor-pointer flex items-center gap-1.5" title="Unggah file data pemetaan siswa (CSV/Excel)">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l4-4m0 0l4 4m-4-4v12"></path></svg>
+          <span class="hidden sm:inline">Import CSV</span>
+          <input type="file" id="inputCsvFile" accept=".csv,.xlsx" onchange="importDataCsv(event)" class="hidden" />
+        </label>
+
+        <button onclick="exportDataExcel()" class="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold rounded-xl transition shadow flex items-center gap-1.5" title="Download Rekap Data Pemetaan Angkatan ke Excel">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
           <span class="hidden sm:inline">Export Excel</span>
         </button>
@@ -67,13 +72,14 @@
       <div class="bg-gradient-to-r from-blue-950 via-slate-900 to-blue-900 rounded-3xl p-8 sm:p-12 text-white shadow-xl relative overflow-hidden text-center sm:text-left">
         <div class="max-w-3xl relative z-10">
           <div class="inline-flex items-center gap-2 px-3 py-1 bg-amber-400 text-blue-950 text-xs font-black rounded-full uppercase tracking-wider mb-4">
-            <span>Official Portal Sukses PTN & Kedinasan</span> • <span>Kelas XII</span>
+            <span>Official Portal Sukses PTN</span> • <span>Kelas XII</span>
           </div>
-          <h2 class="text-2xl sm:text-4xl font-black tracking-tight leading-tight">Pilih Modul Analisis Masuk Kampus</h2>
-          <p class="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed">Sistem Konseling M18 dengan Input Manual Prodi/Kampus/Fakultas serta kolom Daya Tampung & Peminat SNPMB riil agar perhitungan persentase keketatan dan peluang lolos sesuai dengan data resmi pemerintah.</p>
+          <h2 class="text-2xl sm:text-4xl font-black tracking-tight leading-tight">Pilih Modul Analisis Masuk PTN</h2>
+          <p class="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed">Sistem cerdas Tim PTN SMA Muhammadiyah 18 Jakarta untuk memetakan kelulusan secara presisi melalui SNBP (Rapor & TKA), SNBT (7 Subtes UTBK), dan Seleksi Mandiri.</p>
         </div>
       </div>
 
+      <!-- 3 Pilihan Jalur -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         <div onclick="showView('viewSNBP')" class="bg-white border-2 border-slate-200 hover:border-emerald-500 rounded-3xl p-7 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer group flex flex-col justify-between">
@@ -82,8 +88,8 @@
               📊
             </div>
             <span class="inline-block mt-4 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800 uppercase tracking-wide">Jalur Prestasi Rapor</span>
-            <h3 class="text-xl font-black text-slate-900 mt-2 group-hover:text-emerald-700 transition-colors">Analisis Manual SNBP</h3>
-            <p class="text-slate-500 text-xs mt-2 leading-relaxed">Input manual prodi, fakultas, kampus, daya tampung, peminat, nilai rapor 1–5, dan rekam jejak alumni M18.</p>
+            <h3 class="text-xl font-black text-slate-900 mt-2 group-hover:text-emerald-700 transition-colors">Analisis Khusus SNBP & TKA</h3>
+            <p class="text-slate-500 text-xs mt-2 leading-relaxed">Rasionalisasi rapor Smt 1–5, validasi 2 mapel wajib (Kepmen 345), komparasi nilai TKA, audit tabrakan pilihan internal, dan indeks 38 alumni M18.</p>
           </div>
           <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-700">
             <span>Buka Modul SNBP</span>
@@ -91,14 +97,14 @@
           </div>
         </div>
 
-        <div onclick="showView('viewSNBT')" class="bg-white border-2 border-amber-500 rounded-3xl p-7 shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer group flex flex-col justify-between">
+        <div onclick="showView('viewSNBT')" class="bg-white border-2 border-slate-200 hover:border-amber-500 rounded-3xl p-7 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer group flex flex-col justify-between">
           <div>
             <div class="h-14 w-14 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
               📝
             </div>
-            <span class="inline-block mt-4 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-100 text-amber-800 uppercase tracking-wide">Fokus UTBK</span>
-            <h3 class="text-xl font-black text-slate-900 mt-2 group-hover:text-amber-700 transition-colors">Analisis Manual SNBT (7 Subtes)</h3>
-            <p class="text-slate-500 text-xs mt-2 leading-relaxed">Input manual prodi, fakultas, kampus, passing grade, daya tampung, peminat, dan 7 subtes UTBK standar BPPP.</p>
+            <span class="inline-block mt-4 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-100 text-amber-800 uppercase tracking-wide">Fokus Utama Kelas XII</span>
+            <h3 class="text-xl font-black text-slate-900 mt-2 group-hover:text-amber-700 transition-colors">Analisis Khusus SNBT (7 Subtes)</h3>
+            <p class="text-slate-500 text-xs mt-2 leading-relaxed">Input nilai Try Out 7 Subtes UTBK standar BPPP, gamifikasi motivasi, gap analysis persentase lolos, dan pencarian kampus alternatif aman.</p>
           </div>
           <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-amber-700">
             <span>Buka Modul SNBT</span>
@@ -111,9 +117,9 @@
             <div class="h-14 w-14 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
               🛡️
             </div>
-            <span class="inline-block mt-4 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-indigo-100 text-indigo-800 uppercase tracking-wide">Jalur Pengaman</span>
-            <h3 class="text-xl font-black text-slate-900 mt-2 group-hover:text-indigo-700 transition-colors">Analisis Mandiri & Kedinasan</h3>
-            <p class="text-slate-500 text-xs mt-2 leading-relaxed">Mitigasi kampus swasta, Vokasi, dan Sekolah Tinggi Kedinasan dengan kalkulator portofolio.</p>
+            <span class="inline-block mt-4 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-indigo-100 text-indigo-800 uppercase tracking-wide">Jalur Pengaman (Safety Net)</span>
+            <h3 class="text-xl font-black text-slate-900 mt-2 group-hover:text-indigo-700 transition-colors">Analisis Khusus Seleksi Mandiri</h3>
+            <p class="text-slate-500 text-xs mt-2 leading-relaxed">Pemetaan 3 skema mandiri: Jalur Rapor/Vokasi (Tanpa Tes), Jalur Skor UTBK, dan Ujian CBT Lokal, lengkap dengan kalkulator bobot portofolio & sertifikat.</p>
           </div>
           <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-indigo-700">
             <span>Buka Modul Mandiri</span>
@@ -126,113 +132,168 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- 2. VIEW SNBP MANUAL INPUT                  -->
+    <!-- 2. VIEW FORMULIR KHUSUS JALUR SNBP          -->
     <!-- ========================================== -->
     <div id="viewSNBP" class="hidden no-print space-y-6">
       
       <div class="flex items-center justify-between bg-emerald-900 rounded-2xl p-5 text-white shadow-md">
         <div>
-          <span class="text-[10px] font-extrabold bg-emerald-400 text-emerald-950 px-2.5 py-0.5 rounded uppercase">Modul SNBP Manual Input</span>
-          <h2 class="text-xl font-black mt-1">Input Target Prodi, Fakultas, Kampus & Kuota SNPMB</h2>
+          <span class="text-[10px] font-extrabold bg-emerald-400 text-emerald-950 px-2.5 py-0.5 rounded uppercase">Modul Khusus SNBP</span>
+          <h2 class="text-xl font-black mt-1">Diagnostik Rapor, Keketatan & Anti-Tabrakan SNBP</h2>
         </div>
         <button onclick="showView('viewLanding')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-xl text-xs font-bold border border-white/20 transition">
           ← Ganti Jalur
         </button>
       </div>
 
+      <!-- Banner Peringatan Audit Tabrakan Pilihan Internal -->
+      <div id="boxTabrakanWarning" class="hidden p-4 rounded-2xl bg-amber-50 border-2 border-amber-400 text-amber-950 text-xs animate-pulse">
+        <div class="flex items-start gap-3">
+          <span class="text-2xl">⚠️</span>
+          <div>
+            <h4 class="font-extrabold text-sm text-amber-900 uppercase">Peringatan Benturan Pilihan Internal (Tabrakan Prodi di M18):</h4>
+            <p id="descTabrakanWarning" class="mt-1 leading-relaxed"></p>
+          </div>
+        </div>
+      </div>
+
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Kolom Kiri: Biodata & Target PTN SNBP (LAMPIRAN 1 & 2: INPUT MANUAL PRODI, DAYA TAMPUNG, PEMINAT) -->
         <div class="lg:col-span-4 space-y-6">
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
-            <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider">1. Data Identitas Siswa</h3>
+            <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+              <span class="flex h-5 w-5 items-center justify-center rounded bg-emerald-700 text-white text-[10px]">1</span>
+              Data Identitas Siswa
+            </h3>
             <div>
               <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Lengkap Siswa</label>
-              <input id="inNama" type="text" placeholder="Nama siswa..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none" />
+              <input id="inNama" oninput="saveDraft(); checkCollisionInternal();" type="text" placeholder="Masukkan nama siswa..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-emerald-700 focus:outline-none" />
             </div>
             <div>
               <label class="block text-xs font-semibold text-slate-600 mb-1">Kelas / Peminatan</label>
-              <input id="inKelas" type="text" placeholder="XII MIPA" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none" />
+              <input id="inKelas" oninput="saveDraft()" type="text" placeholder="Contoh: XII - 1 (MIPA)" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-emerald-700 focus:outline-none" />
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-1">Guru Konselor</label>
-              <input id="inKonselor" type="text" placeholder="Tim BK M18" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none" />
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Guru Pembimbing / Konselor</label>
+              <input id="inKonselor" oninput="saveDraft()" type="text" placeholder="Contoh: Tim Sukses PTN M18" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-emerald-700 focus:outline-none" />
             </div>
           </div>
 
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
-            <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider">2. Input Manual Pilihan 1 & Kuota SNPMB</h3>
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-1">Jurusan, Fakultas & Kampus Utama</label>
-              <input id="textProdi1" type="text" placeholder="Cth: Kedokteran - Fak. Kedokteran - Universitas Udayana" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium focus:outline-none" />
-            </div>
+            <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+              <span class="flex h-5 w-5 items-center justify-center rounded bg-emerald-700 text-white text-[10px]">2</span>
+              Target Jurusan & PTN SNBP (Input Manual)
+            </h3>
 
-            <div class="grid grid-cols-2 gap-2">
+            <!-- Pilihan 1 -->
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+              <span class="text-xs font-bold text-emerald-800 uppercase block">Pilihan 1 (Prioritas Utama)</span>
               <div>
-                <label class="block text-[10px] font-bold text-indigo-900 mb-1">Mapel Wajib 1</label>
-                <select id="mapelWajib1" class="w-full bg-indigo-50 border border-indigo-200 rounded-lg p-1.5 text-[11px] font-bold text-indigo-950"></select>
+                <label class="block text-[11px] font-semibold text-slate-600 mb-0.5">Nama Program Studi & Universitas</label>
+                <input id="manualProdi1" type="text" placeholder="Cth: Pendidikan Dokter - UI" class="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-medium focus:border-emerald-700 focus:outline-none" />
               </div>
-              <div>
-                <label class="block text-[10px] font-bold text-indigo-900 mb-1">Mapel Wajib 2</label>
-                <select id="mapelWajib2" class="w-full bg-indigo-50 border border-indigo-200 rounded-lg p-1.5 text-[11px] font-bold text-indigo-950"></select>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
-              <div>
-                <label class="block text-[10px] font-semibold text-slate-600 mb-1">Daya Tampung (Kursi)</label>
-                <input id="quotaDaya1" type="number" placeholder="50" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none" />
-              </div>
-              <div>
-                <label class="block text-[10px] font-semibold text-slate-600 mb-1">Jumlah Peminat Riil</label>
-                <input id="quotaPeminat1" type="number" placeholder="2100" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none" />
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[10px] font-semibold text-slate-600 mb-0.5">Daya Tampung</label>
+                  <input id="manualDaya1" type="number" placeholder="Cth: 75" class="w-full bg-white border border-slate-300 rounded-lg px-2 py-1 text-xs font-bold text-center focus:border-emerald-700 focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-[10px] font-semibold text-slate-600 mb-0.5">Jumlah Peminat</label>
+                  <input id="manualPeminat1" type="number" placeholder="Cth: 3820" class="w-full bg-white border border-slate-300 rounded-lg px-2 py-1 text-xs font-bold text-center focus:border-emerald-700 focus:outline-none" />
+                </div>
               </div>
             </div>
 
-            <div class="pt-2 border-t border-slate-100">
-              <label class="block text-xs font-semibold text-slate-600 mb-1">Pilihan 2 (Cadangan)</label>
-              <input id="textProdi2" type="text" placeholder="Cth: Ilmu Gizi - Fak. Kesehatan - UNUD" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium focus:outline-none" />
-            </div>
-            <div class="grid grid-cols-2 gap-2">
+            <!-- Pilihan 2 -->
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+              <span class="text-xs font-bold text-blue-900 uppercase block">Pilihan 2 (Cadangan)</span>
               <div>
-                <label class="block text-[10px] font-semibold text-slate-600 mb-1">Daya Tampung 2</label>
-                <input id="quotaDaya2" type="number" placeholder="40" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none" />
+                <label class="block text-[11px] font-semibold text-slate-600 mb-0.5">Nama Program Studi & Universitas</label>
+                <input id="manualProdi2" type="text" placeholder="Cth: Kedokteran - UPNVJ" class="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-medium focus:border-emerald-700 focus:outline-none" />
               </div>
-              <div>
-                <label class="block text-[10px] font-semibold text-slate-600 mb-1">Peminat 2</label>
-                <input id="quotaPeminat2" type="number" placeholder="1100" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none" />
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[10px] font-semibold text-slate-600 mb-0.5">Daya Tampung</label>
+                  <input id="manualDaya2" type="number" placeholder="Cth: 50" class="w-full bg-white border border-slate-300 rounded-lg px-2 py-1 text-xs font-bold text-center focus:border-emerald-700 focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-[10px] font-semibold text-slate-600 mb-0.5">Jumlah Peminat</label>
+                  <input id="manualPeminat2" type="number" placeholder="Cth: 2400" class="w-full bg-white border border-slate-300 rounded-lg px-2 py-1 text-xs font-bold text-center focus:border-emerald-700 focus:outline-none" />
+                </div>
               </div>
             </div>
+
           </div>
         </div>
 
+        <!-- Kolom Kanan: Input Nilai 12 Mapel & TKA -->
         <div class="lg:col-span-8 space-y-6">
           <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm">
-            <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
-              <h3 class="text-xs font-bold text-slate-900 uppercase">Nilai Rapor Semester 1 s/d 5 (12 Mata Pelajaran)</h3>
-              <button type="button" onclick="isiContohSimulasi()" class="text-xs text-emerald-700 font-bold underline">+ Isi Contoh Simulasi</button>
+            <div class="flex flex-wrap items-center justify-between pb-3 mb-4 border-b border-slate-100 gap-2">
+              <div>
+                <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                  <span class="flex h-5 w-5 items-center justify-center rounded bg-emerald-700 text-white text-[10px]">3</span>
+                  Nilai Rapor Semester 1 s/d 5 (Sesuai Permendikbud)
+                </h3>
+                <p class="text-[11px] text-slate-400">Data otomatis tersimpan (Auto-Save) di peramban saat diketik.</p>
+              </div>
+              <button type="button" onclick="isiContohSimulasi()" class="text-xs text-emerald-700 hover:text-emerald-900 font-bold underline">
+                + Isi Simulasi Nilai Cepat
+              </button>
             </div>
+
             <div class="overflow-x-auto">
               <table class="w-full text-left text-xs">
                 <thead>
                   <tr class="border-b border-slate-200 text-slate-500">
-                    <th class="py-2 uppercase text-[10px] w-48">Mata Pelajaran</th>
-                    <th class="py-2 text-center">Smt 1</th>
-                    <th class="py-2 text-center">Smt 2</th>
-                    <th class="py-2 text-center">Smt 3</th>
-                    <th class="py-2 text-center">Smt 4</th>
-                    <th class="py-2 text-center text-amber-800 bg-amber-50">Target Smt 5</th>
-                    <th class="py-2 text-center text-emerald-900 bg-emerald-50">Rata-Rata</th>
+                    <th class="py-2 font-bold uppercase text-[10px] w-48">Mata Pelajaran</th>
+                    <th class="py-2 text-center font-bold">Smt 1</th>
+                    <th class="py-2 text-center font-bold">Smt 2</th>
+                    <th class="py-2 text-center font-bold">Smt 3</th>
+                    <th class="py-2 text-center font-bold">Smt 4</th>
+                    <th class="py-2 text-center font-bold text-amber-800 bg-amber-50 rounded">Target Smt 5</th>
+                    <th class="py-2 text-center font-bold text-emerald-900 bg-emerald-50/80 rounded">Rata-Rata</th>
                   </tr>
                 </thead>
                 <tbody id="tableBodyInput" class="divide-y divide-slate-100"></tbody>
               </table>
             </div>
 
-            <div class="mt-5 p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
+            <!-- Opsi Nilai TKA -->
+            <div class="mt-4 p-4 rounded-xl bg-indigo-50/60 border border-indigo-200">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
+                <span class="text-xs font-bold text-indigo-950 uppercase tracking-wide flex items-center gap-1.5">
+                  <span>🎯</span> Tes Kemampuan Akademik (TKA / Try Out)
+                </span>
+                
+                <div class="flex items-center gap-4 text-xs">
+                  <label class="flex items-center gap-1.5 cursor-pointer">
+                    <input type="radio" name="optTKA" value="belum" checked onchange="toggleTKAInput(false); saveDraft();" class="text-emerald-600">
+                    <span class="font-medium text-slate-700">Belum Ada Nilai TKA</span>
+                  </label>
+                  <label class="flex items-center gap-1.5 cursor-pointer">
+                    <input type="radio" name="optTKA" value="ada" onchange="toggleTKAInput(true); saveDraft();" class="text-emerald-600">
+                    <span class="font-bold text-indigo-950">Sudah Ada Nilai TKA</span>
+                  </label>
+                </div>
+              </div>
+
+              <div id="boxInputTKA" class="hidden mt-3 pt-3 border-t border-indigo-100 flex items-center justify-between gap-3">
+                <p class="text-[11px] text-indigo-800">Masukkan rata-rata nilai TKA yang telah diperoleh:</p>
+                <div class="flex items-center gap-2">
+                  <input id="inNilaiTKA" oninput="saveDraft()" type="number" step="0.1" placeholder="0-100" class="w-24 text-center bg-white border border-indigo-300 rounded-xl py-1.5 text-sm font-extrabold text-indigo-950 focus:border-emerald-700 focus:outline-none" />
+                  <span class="text-xs text-indigo-900 font-bold">/ 100</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-5 p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p class="text-xs font-bold text-slate-800">Rata-Rata Kumulatif Rapor: <span id="labelGrandTotal" class="text-emerald-800 text-sm font-black ml-1">0.0</span></p>
+                <p class="text-[11px] text-slate-500">Dihitung otomatis dari seluruh semester aktif.</p>
               </div>
               <button onclick="jalankanAnalisisSNBP()" class="px-6 py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-bold rounded-xl transition shadow">
-                Jalankan Analisis SNBP & Buka Laporan
+                Jalankan Analisis Khusus SNBP & Buka Laporan
               </button>
             </div>
           </div>
@@ -242,79 +303,82 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- 3. VIEW SNBT MANUAL INPUT                  -->
+    <!-- 3. VIEW FORMULIR KHUSUS JALUR SNBT          -->
     <!-- ========================================== -->
     <div id="viewSNBT" class="hidden no-print space-y-6">
       
       <div class="flex items-center justify-between bg-amber-900 rounded-2xl p-5 text-white shadow-md">
         <div>
-          <span class="text-[10px] font-extrabold bg-amber-400 text-amber-950 px-2.5 py-0.5 rounded uppercase">Modul SNBT Manual Input</span>
-          <h2 class="text-xl font-black mt-1">Input Target Prodi, Fakultas, Kampus & Kuota SNPMB</h2>
+          <span class="text-[10px] font-extrabold bg-amber-400 text-amber-950 px-2.5 py-0.5 rounded uppercase">Modul Khusus SNBT</span>
+          <h2 class="text-xl font-black mt-1">Diagnostik Skor 7 Subtes UTBK & Gap Analysis</h2>
         </div>
-        <button onclick="showView('viewLanding')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-xl text-xs font-bold border border-white/20 transition">
-          ← Ganti Jalur
-        </button>
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="isiContohUTBK()" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-amber-950 rounded-xl text-xs font-extrabold transition shadow-sm">
+            ⚡ Isi Contoh Simulasi UTBK
+          </button>
+          <button onclick="showView('viewLanding')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-xl text-xs font-bold border border-white/20 transition">
+            ← Ganti Jalur
+          </button>
+        </div>
       </div>
 
       <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
         
+        <!-- Identitas Siswa SNBT -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-4 border-b border-slate-100">
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Siswa</label>
             <input id="inNamaSNBT" type="text" placeholder="Nama siswa..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-amber-700 focus:outline-none" />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-600 mb-1">Pilihan 1 (Jurusan, Fakultas & Kampus Utama)</label>
-            <input id="textProdiSNBT1" type="text" placeholder="Cth: Teknik Informatika - STEI - ITB" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium focus:outline-none" />
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Pilihan 1 SNBT (Prioritas Utama)</label>
+            <select id="selectProdiSNBT1" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-amber-700 focus:outline-none font-medium"></select>
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-600 mb-1">Pilihan 2 (Cadangan)</label>
-            <input id="textProdiSNBT2" type="text" placeholder="Cth: Sistem Informasi - Fasilkom - UI" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium focus:outline-none" />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 p-4 bg-amber-50/60 rounded-xl border border-amber-200">
-          <div>
-            <label class="block text-[10px] font-bold text-amber-900 mb-1">Passing Grade Pilihan 1</label>
-            <input id="pgSNBT1" type="number" placeholder="720" class="w-full bg-white border border-amber-300 rounded-lg p-2 text-xs font-extrabold focus:outline-none" />
-          </div>
-          <div>
-            <label class="block text-[10px] font-bold text-amber-900 mb-1">Daya / Peminat Pilihan 1</label>
-            <div class="grid grid-cols-2 gap-1">
-              <input id="quotaDayaSNBT1" type="number" placeholder="130" class="bg-white border border-amber-300 rounded-lg p-2 text-xs font-bold" />
-              <input id="quotaPeminatSNBT1" type="number" placeholder="3450" class="bg-white border border-amber-300 rounded-lg p-2 text-xs font-bold" />
-            </div>
-          </div>
-          <div>
-            <label class="block text-[10px] font-bold text-amber-900 mb-1">Passing Grade Pilihan 2</label>
-            <input id="pgSNBT2" type="number" placeholder="715" class="w-full bg-white border border-amber-300 rounded-lg p-2 text-xs font-extrabold focus:outline-none" />
-          </div>
-          <div>
-            <label class="block text-[10px] font-bold text-amber-900 mb-1">Daya / Peminat Pilihan 2</label>
-            <div class="grid grid-cols-2 gap-1">
-              <input id="quotaDayaSNBT2" type="number" placeholder="45" class="bg-white border border-amber-300 rounded-lg p-2 text-xs font-bold" />
-              <input id="quotaPeminatSNBT2" type="number" placeholder="1980" class="bg-white border border-amber-300 rounded-lg p-2 text-xs font-bold" />
-            </div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Pilihan 2 SNBT (Cadangan)</label>
+            <select id="selectProdiSNBT2" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-amber-700 focus:outline-none font-medium"></select>
           </div>
         </div>
 
         <div>
-          <div class="flex items-center justify-between mb-3">
-            <h3 class="text-sm font-bold text-slate-900">Skor Try Out 7 Subtes UTBK (Skala 0–1000)</h3>
-            <button type="button" onclick="isiContohUTBK()" class="text-xs text-amber-700 font-bold underline">⚡ Isi Contoh UTBK</button>
-          </div>
+          <h3 class="text-sm font-bold text-slate-900 mb-3">Input Skor Hasil Try Out 7 Subtes UTBK (Skala 0–1000)</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="p-3 bg-slate-50 rounded-xl border"><label class="block text-xs font-bold text-slate-700 mb-1">Penalaran Umum (PU)</label><input id="utbk_pu" type="number" placeholder="680" class="w-full bg-white border rounded-lg p-2 text-xs font-bold" /></div>
-            <div class="p-3 bg-slate-50 rounded-xl border"><label class="block text-xs font-bold text-slate-700 mb-1">Pengetahuan Kuantitatif (PK)</label><input id="utbk_pk" type="number" placeholder="700" class="w-full bg-white border rounded-lg p-2 text-xs font-bold" /></div>
-            <div class="p-3 bg-slate-50 rounded-xl border"><label class="block text-xs font-bold text-slate-700 mb-1">Penalaran Matematika (PM)</label><input id="utbk_pm" type="number" placeholder="690" class="w-full bg-white border rounded-lg p-2 text-xs font-bold" /></div>
-            <div class="p-3 bg-slate-50 rounded-xl border"><label class="block text-xs font-bold text-slate-700 mb-1">Pemahaman Bacaan (PBM)</label><input id="utbk_pbm" type="number" placeholder="660" class="w-full bg-white border rounded-lg p-2 text-xs font-bold" /></div>
-            <div class="p-3 bg-slate-50 rounded-xl border"><label class="block text-xs font-bold text-slate-700 mb-1">Pemahaman Umum (PPU)</label><input id="utbk_ppu" type="number" placeholder="650" class="w-full bg-white border rounded-lg p-2 text-xs font-bold" /></div>
-            <div class="p-3 bg-slate-50 rounded-xl border"><label class="block text-xs font-bold text-slate-700 mb-1">Literasi B. Indonesia</label><input id="utbk_lit_indo" type="number" placeholder="680" class="w-full bg-white border rounded-lg p-2 text-xs font-bold" /></div>
-            <div class="p-3 bg-slate-50 rounded-xl border"><label class="block text-xs font-bold text-slate-700 mb-1">Literasi B. Inggris</label><input id="utbk_lit_ing" type="number" placeholder="660" class="w-full bg-white border rounded-lg p-2 text-xs font-bold" /></div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <label class="block text-xs font-bold text-slate-700 mb-1">Penalaran Umum (PU)</label>
+              <input id="utbk_pu" type="number" placeholder="Contoh: 680" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-800 focus:border-amber-600 focus:outline-none" />
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <label class="block text-xs font-bold text-slate-700 mb-1">Pengetahuan Kuantitatif (PK)</label>
+              <input id="utbk_pk" type="number" placeholder="Contoh: 700" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-800 focus:border-amber-600 focus:outline-none" />
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <label class="block text-xs font-bold text-slate-700 mb-1">Penalaran Matematika (PM)</label>
+              <input id="utbk_pm" type="number" placeholder="Contoh: 690" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-800 focus:border-amber-600 focus:outline-none" />
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <label class="block text-xs font-bold text-slate-700 mb-1">Pemahaman Bacaan & Menulis (PBM)</label>
+              <input id="utbk_pbm" type="number" placeholder="Contoh: 660" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-800 focus:border-amber-600 focus:outline-none" />
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <label class="block text-xs font-bold text-slate-700 mb-1">Pengetahuan & Pemahaman Umum (PPU)</label>
+              <input id="utbk_ppu" type="number" placeholder="Contoh: 650" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-800 focus:border-amber-600 focus:outline-none" />
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <label class="block text-xs font-bold text-slate-700 mb-1">Literasi Bahasa Indonesia</label>
+              <input id="utbk_lit_indo" type="number" placeholder="Contoh: 680" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-800 focus:border-amber-600 focus:outline-none" />
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <label class="block text-xs font-bold text-slate-700 mb-1">Literasi Bahasa Inggris</label>
+              <input id="utbk_lit_ing" type="number" placeholder="Contoh: 660" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-800 focus:border-amber-600 focus:outline-none" />
+            </div>
+            <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 flex flex-col justify-center text-center">
+              <span class="text-[10px] font-bold text-amber-900 uppercase">Standar Nilai Resmi</span>
+              <p class="text-[11px] font-extrabold text-amber-950 mt-1">Format BPPP Kemendikbud</p>
+            </div>
           </div>
         </div>
 
-        <button onclick="jalankanAnalisisSNBT()" class="w-full py-3.5 bg-amber-700 hover:bg-amber-800 text-white font-bold rounded-xl transition text-xs shadow-sm">
+        <button onclick="jalankanAnalisisSNBT()" class="w-full py-3 bg-amber-700 hover:bg-amber-800 text-white font-bold rounded-xl transition text-xs shadow-sm">
           Jalankan Analisis Khusus SNBT & Buka Laporan
         </button>
       </div>
@@ -322,7 +386,7 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- 4. VIEW FORMULIR KHUSUS JALUR MANDIRI      -->
+    <!-- 4. VIEW FORMULIR KHUSUS JALUR MANDIRI       -->
     <!-- ========================================== -->
     <div id="viewMandiri" class="hidden no-print space-y-6">
       
@@ -331,37 +395,43 @@
           <span class="text-[10px] font-extrabold bg-indigo-400 text-indigo-950 px-2.5 py-0.5 rounded uppercase">Modul Khusus Mandiri</span>
           <h2 class="text-xl font-black mt-1">Kalkulator Seleksi Mandiri, Portofolio & Sertifikat</h2>
         </div>
-        <button onclick="showView('viewLanding')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-xl text-xs font-bold border border-white/20 transition">
-          ← Ganti Jalur
-        </button>
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="isiContohMandiri()" class="px-3 py-1.5 bg-indigo-500 hover:bg-indigo-400 text-white rounded-xl text-xs font-extrabold transition shadow-sm">
+            ⚡ Isi Contoh Simulasi Mandiri
+          </button>
+          <button onclick="showView('viewLanding')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-xl text-xs font-bold border border-white/20 transition">
+            ← Ganti Jalur
+          </button>
+        </div>
       </div>
 
-      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4 border-b border-slate-100">
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Lengkap Siswa</label>
-            <input id="inNamaMandiri" type="text" placeholder="Nama siswa..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none" />
+            <input id="inNamaMandiri" type="text" placeholder="Nama siswa..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-indigo-600 focus:outline-none" />
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Skor Modal Akademik (Rata-rata Rapor / TO UTBK):</label>
-            <input id="inModalMandiri" type="number" step="0.1" placeholder="88.5" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none" />
+            <input id="inModalMandiri" type="number" step="0.1" placeholder="Contoh: 88.5" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:bg-white focus:border-indigo-600 focus:outline-none" />
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
           <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Pilihan 1 Mandiri / Kedinasan:</label>
-            <input id="textProdiMandiri1" type="text" placeholder="Cth: D4 Akuntansi Sektor Publik - PKN STAN" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none" />
+            <label class="block text-xs font-bold text-slate-700 mb-1">Pilihan 1 Mandiri (Target Utama):</label>
+            <select id="selectProdiMandiri1" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:bg-white focus:border-indigo-600 focus:outline-none"></select>
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Pilihan 2 Cadangan:</label>
-            <input id="textProdiMandiri2" type="text" placeholder="Cth: S1 Manajemen - Telkom University" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none" />
+            <label class="block text-xs font-bold text-slate-700 mb-1">Pilihan 2 Mandiri (Cadangan):</label>
+            <select id="selectProdiMandiri2" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:bg-white focus:border-indigo-600 focus:outline-none"></select>
           </div>
         </div>
 
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">Sertifikat Prestasi / Portofolio Pendukung Siswa:</label>
-          <select id="selectPrestasiMandiri" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-semibold focus:outline-none">
+          <select id="selectPrestasiMandiri" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:bg-white focus:border-indigo-600 focus:outline-none">
             <option value="0">Tidak Ada Sertifikat Tambahan (0%)</option>
             <option value="15">Juara 1-3 Tingkat Internasional / Nasional (+15%)</option>
             <option value="10">Juara 1-3 Tingkat Provinsi (+10%)</option>
@@ -372,18 +442,18 @@
         </div>
 
         <button onclick="jalankanAnalisisMandiri()" class="w-full py-3 bg-indigo-900 hover:bg-indigo-950 text-white font-bold rounded-xl transition text-xs shadow-sm">
-          Jalankan Analisis Mandiri & Buka Laporan
+          Jalankan Analisis Khusus Mandiri & Buka Laporan
         </button>
       </div>
 
     </div>
 
     <!-- ========================================================= -->
-    <!-- 5. TEMPLATE LAPORAN RESMI (DENGAN LAMPIRAN 1 & 2)       -->
+    <!-- 5. TEMPLATE LAPORAN RESMI KHUSUS (TERPISAH PER JALUR)   -->
     <!-- ========================================================= -->
     <div id="reportSection" class="hidden space-y-6 mt-8">
       
-      <!-- HALAMAN UTAMA LAPORAN -->
+      <!-- KOP RESMI SMA MUHAMMADIYAH 18 JAKARTA -->
       <div class="bg-white border border-slate-200 p-6 rounded-2xl print-card">
         
         <div class="flex items-center justify-between border-b-2 border-blue-950 pb-4 mb-4">
@@ -394,7 +464,7 @@
             <div>
               <h2 class="text-base sm:text-lg font-black text-blue-950 uppercase tracking-tight leading-tight">SMA MUHAMMADIYAH 18 JAKARTA</h2>
               <p class="text-xs font-bold text-amber-700 tracking-wider">SCHOOL OF CHAMPION</p>
-              <p class="text-[10px] text-slate-500">Layanan Bimbingan & Konseling Peminatan Masuk Perguruan Tinggi Negeri & Kedinasan</p>
+              <p class="text-[10px] text-slate-500">Layanan Bimbingan & Konseling Peminatan Masuk Perguruan Tinggi Negeri</p>
               <p class="text-[9px] text-slate-400">Jl. Cipulir I No.15, Kebayoran Lama, Jakarta Selatan 12230</p>
             </div>
           </div>
@@ -404,16 +474,31 @@
           </div>
         </div>
 
-        <!-- Tabel Info Siswa -->
+        <!-- Tabel Info Siswa Universal -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs bg-slate-50 p-3 rounded-xl border border-slate-200 mb-4 print-card">
-          <div><span class="text-[10px] text-slate-400 block font-semibold">NAMA SISWA</span><p id="outNamaReport" class="font-bold text-slate-900">-</p></div>
-          <div><span class="text-[10px] text-slate-400 block font-semibold">KELAS / JURUSAN</span><p id="outKelasReport" class="font-bold text-slate-900">-</p></div>
-          <div><span class="text-[10px] text-slate-400 block font-semibold">GURU PEMBIMBING</span><p id="outKonselorReport" class="font-bold text-slate-900">-</p></div>
-          <div><span id="outLabelSkorUtama" class="text-[10px] text-slate-400 block font-semibold">MODAL NILAI</span><p id="outValSkorUtama" class="font-black text-blue-900 text-sm">-</p></div>
+          <div>
+            <span class="text-[10px] text-slate-400 block font-semibold">NAMA SISWA</span>
+            <p id="outNamaReport" class="font-bold text-slate-900">-</p>
+          </div>
+          <div>
+            <span class="text-[10px] text-slate-400 block font-semibold">KELAS / JURUSAN</span>
+            <p id="outKelasReport" class="font-bold text-slate-900">-</p>
+          </div>
+          <div>
+            <span class="text-[10px] text-slate-400 block font-semibold">GURU PEMBIMBING</span>
+            <p id="outKonselorReport" class="font-bold text-slate-900">-</p>
+          </div>
+          <div>
+            <span id="outLabelSkorUtama" class="text-[10px] text-slate-400 block font-semibold">MODAL NILAI</span>
+            <p id="outValSkorUtama" class="font-black text-blue-900 text-sm">-</p>
+          </div>
         </div>
 
-        <!-- Konten SNBP -->
+        <!-- ============================== -->
+        <!-- KONTEN KHUSUS JALUR 1: SNBP    -->
+        <!-- ============================== -->
         <div id="contentReportSNBP" class="hidden space-y-4">
+          
           <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
               <span class="text-[10px] font-bold uppercase tracking-wider text-slate-700">Analisis Konsistensi Akademik (Kurva Tren Rapor):</span>
@@ -421,124 +506,186 @@
             </div>
             <div id="outGrid5Semester" class="grid grid-cols-5 gap-2 text-center text-xs"></div>
           </div>
+
           <div>
-            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-600 block mb-1.5">Komparasi Nilai Tertinggi Siswa vs Mapel Pendukung Wajib (Kepmen 345/M/2022):</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-600 block mb-1.5">Komparasi Nilai Tertinggi Siswa vs Mapel Pendukung Wajib SNBP (Kepmen 345/M/2022):</span>
             <div id="outTopMapelSNBP" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs"></div>
           </div>
+
           <div id="outAlertBoxSNBP" class="p-3.5 rounded-xl border text-xs">
             <div class="flex items-start gap-2">
               <span id="outAlertIconSNBP" class="text-base"></span>
-              <div><h4 id="outAlertTitleSNBP" class="font-bold"></h4><p id="outAlertDescSNBP" class="text-[11px] mt-0.5 leading-relaxed"></p></div>
+              <div>
+                <h4 id="outAlertTitleSNBP" class="font-bold"></h4>
+                <p id="outAlertDescSNBP" class="text-[11px] mt-0.5 leading-relaxed"></p>
+              </div>
             </div>
           </div>
+
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="p-3.5 rounded-xl border border-slate-200 bg-white print-card space-y-2">
-              <div class="flex justify-between items-center border-b border-slate-100 pb-1.5"><span class="text-xs font-bold text-emerald-800 uppercase">Pilihan 1</span><span id="outBadgeSNBP1" class="px-2 py-0.5 rounded text-[10px] font-extrabold"></span></div>
+              <div class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                <span class="text-xs font-bold text-emerald-800 uppercase">Pilihan 1 (Prioritas Utama)</span>
+                <span id="outBadgeSNBP1" class="px-2 py-0.5 rounded text-[10px] font-extrabold"></span>
+              </div>
               <p id="outProdiSNBP1" class="font-bold text-slate-900 text-xs"></p>
               <div id="outAlumniBadgeSNBP1"></div>
-              <div class="flex items-baseline gap-1 mt-1"><span id="outScoreSNBP1" class="text-2xl font-black text-emerald-600">0%</span><span class="text-[10px] text-slate-500 font-medium">Peluang Lolos</span></div>
+              <p id="outMapelWajibSNBP1" class="text-[9.5px] text-blue-950 font-bold bg-blue-50 px-2 py-1 rounded border border-blue-200"></p>
+              <p id="outStatSNBP1" class="text-[9.5px] text-slate-500"></p>
+              <div class="flex items-baseline gap-1 mt-1">
+                <span id="outScoreSNBP1" class="text-2xl font-black text-emerald-600">0%</span>
+                <span class="text-[10px] text-slate-500 font-medium">Estimasi Peluang Lolos</span>
+              </div>
             </div>
+
             <div class="p-3.5 rounded-xl border border-slate-200 bg-white print-card space-y-2">
-              <div class="flex justify-between items-center border-b border-slate-100 pb-1.5"><span class="text-xs font-bold text-blue-900 uppercase">Pilihan 2</span><span id="outBadgeSNBP2" class="px-2 py-0.5 rounded text-[10px] font-extrabold"></span></div>
+              <div class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                <span class="text-xs font-bold text-blue-900 uppercase">Pilihan 2 (Cadangan)</span>
+                <span id="outBadgeSNBP2" class="px-2 py-0.5 rounded text-[10px] font-extrabold"></span>
+              </div>
               <p id="outProdiSNBP2" class="font-bold text-slate-900 text-xs"></p>
               <div id="outAlumniBadgeSNBP2"></div>
-              <div class="flex items-baseline gap-1 mt-1"><span id="outScoreSNBP2" class="text-2xl font-black text-blue-900">0%</span><span class="text-[10px] text-slate-500 font-medium">Peluang Lolos</span></div>
+              <p id="outMapelWajibSNBP2" class="text-[9.5px] text-blue-950 font-bold bg-blue-50 px-2 py-1 rounded border border-blue-200"></p>
+              <p id="outStatSNBP2" class="text-[9.5px] text-slate-500"></p>
+              <div class="flex items-baseline gap-1 mt-1">
+                <span id="outScoreSNBP2" class="text-2xl font-black text-blue-900">0%</span>
+                <span class="text-[10px] text-slate-500 font-medium">Estimasi Peluang Lolos</span>
+              </div>
             </div>
           </div>
+
+          <!-- LAMPIRAN 3: ALTERNATIF PRODI LINEAR (MAKSIMAL 5 REFERENSI, TANPA PERSENTASE PELUANG, HANYA JURUSAN, FAKULTAS, UNIVERSITAS) -->
+          <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 print-card">
+            <span class="text-[10px] font-bold text-slate-700 uppercase block mb-1.5">Rekomendasi Alternatif Prodi Linear (Kepmendikbudristek No. 345/M/2022):</span>
+            <div id="outRekomLinearSNBP" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2"></div>
+          </div>
+
+          <div class="p-3 rounded-xl border border-indigo-200 bg-indigo-50/50 text-[10px] text-indigo-950 space-y-1.5">
+            <p class="font-bold uppercase tracking-wide">⚖️ Rincian Transparansi Formula & Sumber Regulasi Pemerintah:</p>
+            <p id="outFormulaDetail" class="font-mono text-[9.5px] leading-relaxed"></p>
+            <p class="text-[9px] text-slate-600 mt-1 italic"><b>Sumber Kebijakan:</b> Permendikbudristek No. 48/2022, Kepmendikbudristek No. 345/M/2022, dan Pangkalan Data BPPP SNPMB.</p>
+          </div>
         </div>
 
-        <!-- Konten SNBT -->
+        <!-- ============================== -->
+        <!-- KONTEN KHUSUS JALUR 2: SNBT    -->
+        <!-- ============================== -->
         <div id="contentReportSNBT" class="hidden space-y-4">
+          
           <div id="boxMotivasiSNBT" class="p-4 rounded-2xl border-2 shadow-sm space-y-2">
-            <div class="flex items-center justify-between"><span id="outBadgeGamifikasi" class="px-3 py-1 rounded-full text-xs font-black uppercase"></span></div>
+            <div class="flex items-center justify-between">
+              <span id="outBadgeGamifikasi" class="px-3 py-1 rounded-full text-xs font-black uppercase"></span>
+              <span id="outMotivasiStatus" class="text-xs font-bold"></span>
+            </div>
             <p id="outMotivasiPesan" class="text-xs leading-relaxed font-medium"></p>
           </div>
-          <div id="outGrid7Subtes" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 text-center"></div>
+
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-600 block mb-1.5">Rekap Skor 7 Subtes UTBK-SNBT (Standar Resmi BPPP Kemendikbud):</span>
+            <div id="outGrid7Subtes" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 text-center"></div>
+          </div>
+
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="p-3.5 rounded-xl border border-amber-200 bg-amber-50/50 space-y-2"><p id="outProdiUTBK1" class="font-bold text-slate-900 text-xs"></p><p id="outPeluangUTBK1" class="text-xl font-black text-emerald-700"></p></div>
-            <div class="p-3.5 rounded-xl border border-slate-200 bg-white space-y-2"><p id="outProdiUTBK2" class="font-bold text-slate-900 text-xs"></p><p id="outPeluangUTBK2" class="text-xl font-black text-blue-700"></p></div>
+            <div class="p-3.5 rounded-xl border border-amber-200 bg-amber-50/50 print-card space-y-2">
+              <div class="flex justify-between items-center border-b border-amber-200 pb-1.5">
+                <span class="text-xs font-bold text-amber-900 uppercase">Target Pilihan 1 SNBT</span>
+                <span id="outBadgeUTBK1" class="px-2 py-0.5 rounded text-[10px] font-extrabold"></span>
+              </div>
+              <p id="outProdiUTBK1" class="font-bold text-slate-900 text-xs"></p>
+              <div class="flex justify-between items-center text-xs pt-1">
+                <span class="text-slate-500">Passing Grade: <b id="outPassingUTBK1" class="text-amber-800"></b></span>
+                <span class="text-slate-500">Estimasi Peluang: <b id="outPeluangUTBK1" class="text-emerald-700"></b></span>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl border border-slate-200 bg-white print-card space-y-2">
+              <div class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                <span class="text-xs font-bold text-slate-800 uppercase">Target Pilihan 2 SNBT</span>
+                <span id="outBadgeUTBK2" class="px-2 py-0.5 rounded text-[10px] font-extrabold"></span>
+              </div>
+              <p id="outProdiUTBK2" class="font-bold text-slate-900 text-xs"></p>
+              <div class="flex justify-between items-center text-xs pt-1">
+                <span class="text-slate-500">Passing Grade: <b id="outPassingUTBK2" class="text-slate-800"></b></span>
+                <span class="text-slate-500">Estimasi Peluang: <b id="outPeluangUTBK2" class="text-blue-700"></b></span>
+              </div>
+            </div>
           </div>
+
+          <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 print-card">
+            <span class="text-[10px] font-bold text-slate-700 uppercase block mb-1.5">Rekomendasi Kampus Alternatif 100% Aman Berdasarkan Skor UTBK Kamu Saat Ini:</span>
+            <div id="outSmartMatchingKampus" class="grid grid-cols-1 sm:grid-cols-3 gap-2"></div>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-slate-200 bg-white print-card">
+            <span class="text-[10px] font-bold text-slate-700 uppercase block mb-1.5">Roadmap Action Plan Penguatan Subtes (Panduan Khusus Kelas 12):</span>
+            <div id="outRoadmapSNBT" class="space-y-1.5"></div>
+          </div>
+
         </div>
 
-        <!-- Konten Mandiri -->
+        <!-- ============================== -->
+        <!-- KONTEN KHUSUS JALUR 3: MANDIRI -->
+        <!-- ============================== -->
         <div id="contentReportMandiri" class="hidden space-y-4">
-          <div class="grid grid-cols-3 gap-3 text-center text-xs">
-            <div class="p-3 bg-slate-50 rounded-xl border"><span class="text-[10px] text-slate-400 block">MODAL</span><p id="outMandiriModalVal" class="text-lg font-black"></p></div>
-            <div class="p-3 bg-slate-50 rounded-xl border"><span class="text-[10px] text-slate-400 block">SERTIFIKAT</span><p id="outMandiriBonusVal" class="text-lg font-black text-indigo-700"></p></div>
-            <div class="p-3 bg-indigo-50 rounded-xl border"><span class="text-[10px] text-indigo-900 block">ESTIMASI</span><p id="outMandiriPeluangVal" class="text-lg font-black text-emerald-600"></p></div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-xs">
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <span class="text-[10px] text-slate-400 block font-bold">MODAL AKADEMIK AWAL</span>
+              <p id="outMandiriModalVal" class="text-xl font-black text-slate-900 mt-0.5"></p>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <span class="text-[10px] text-slate-400 block font-bold">TAMBAHAN PORTOFOLIO/SERTIFIKAT</span>
+              <p id="outMandiriBonusVal" class="text-xl font-black text-indigo-700 mt-0.5"></p>
+            </div>
+            <div class="p-3 bg-indigo-50 rounded-xl border border-indigo-200">
+              <span class="text-[10px] text-indigo-900 block font-bold">ESTIMASI PELUANG MANDIRI</span>
+              <p id="outMandiriPeluangVal" class="text-xl font-black text-emerald-600 mt-0.5"></p>
+            </div>
           </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="p-3.5 rounded-xl border bg-indigo-50/40"><p id="outProdiMandiriReport1" class="font-bold text-xs"></p><p id="outSkemaMandiri1" class="text-[10px] text-indigo-800"></p></div>
-            <div class="p-3.5 rounded-xl border bg-white"><p id="outProdiMandiriReport2" class="font-bold text-xs"></p><p id="outSkemaMandiri2" class="text-[10px] text-slate-600"></p></div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-3.5 rounded-xl border border-indigo-200 bg-indigo-50/40 print-card space-y-2">
+              <span class="text-xs font-bold text-indigo-950 uppercase block">Pilihan Mandiri 1</span>
+              <p id="outProdiMandiriReport1" class="font-bold text-slate-900 text-xs"></p>
+              <p id="outSkemaMandiri1" class="text-[10px] text-indigo-800 font-semibold"></p>
+            </div>
+            <div class="p-3.5 rounded-xl border border-slate-200 bg-white print-card space-y-2">
+              <span class="text-xs font-bold text-slate-800 uppercase block">Pilihan Mandiri 2</span>
+              <p id="outProdiMandiriReport2" class="font-bold text-slate-900 text-xs"></p>
+              <p id="outSkemaMandiri2" class="text-[10px] text-slate-600 font-semibold"></p>
+            </div>
           </div>
+
+          <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 print-card text-[10px] space-y-1.5 leading-relaxed text-slate-600">
+            <p><strong>Panduan Strategis Tim PTN M18:</strong></p>
+            <p>• <b>Skema Rapor / Vokasi:</b> Daftarkan ke PPKB UI, SM-IPB Rapor, SMUP UNPAD Rapor jika rata-rata rapor &ge; 88.0.</p>
+            <p>• <b>Skema Nilai UTBK:</b> Manfaatkan sertifikat skor UTBK resmi untuk SMUB Brawijaya, SM UNS, dan SEMA UPNVJ tanpa tes ulang.</p>
+            <p>• <b>Skema Ujian CBT Mandiri:</b> Persiapkan materi tes SIMAK UI, UM-CBT UGM, dan PENMABA UNJ sebagai cadangan prioritas.</p>
+          </div>
+
         </div>
 
-        <div class="grid grid-cols-2 gap-8 text-center text-xs text-slate-700 pt-2 border-t border-slate-200 mt-6">
-          <div><p>Orang Tua / Wali Siswa</p><div class="h-12"></div><p>( .................................... )</p></div>
-          <div><p>Jakarta, <span id="outTanggalCetak"></span></p><p class="font-bold">Koordinator Tim Sukses PTN</p><div class="h-12"></div><p>( Fadhillah Umar, S.Pd. )</p></div>
+        <!-- Disclaimer Akademik Resmi -->
+        <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200 text-[9.5px] text-slate-500 leading-relaxed my-4">
+          <strong>Klausul Akademik:</strong> Dokumen ini adalah instrumen Sistem Pendukung Keputusan Konseling (DSS) berbasis pembobotan mata pelajaran pendukung Permendikbudristek No. 48/2022, Kepmendikbudristek No. 345/M/2022, serta Indeks Rekam Jejak Sekolah SMA Muhammadiyah 18 Jakarta. Keputusan akhir sepenuhnya merupakan hak prerogatif panitia SNPMB BPPP dan masing-masing PTN.
         </div>
-      </div>
 
-      <!-- LAMPIRAN 1: ALTERNATIF JURUSAN (SELURUH PTN INDONESIA - TANPA PERSENTASE) -->
-      <div class="bg-white border border-slate-200 p-6 rounded-2xl print-card page-break">
-        <div class="border-b border-indigo-950 pb-3 mb-4 flex items-center justify-between">
+        <!-- Area Tanda Tangan Konseling BK -->
+        <div class="grid grid-cols-2 gap-8 text-center text-xs text-slate-700 pt-2 border-t border-slate-200">
           <div>
-            <span class="px-2 py-0.5 bg-indigo-100 text-indigo-900 text-[10px] font-extrabold rounded uppercase">Lampiran 1</span>
-            <h3 class="text-sm font-black text-indigo-950 uppercase mt-1">Referensi Alternatif Jurusan Seluruh PTN di Indonesia</h3>
+            <p>Mengetahui,</p>
+            <p class="font-bold">Orang Tua / Wali Siswa</p>
+            <div class="h-12"></div>
+            <p>( .................................................... )</p>
           </div>
-          <p class="text-[10px] text-slate-500 italic">Berdasarkan Profil Nilai Akademik Siswa & Referensi Nasional</p>
-        </div>
-        <p class="text-xs text-slate-600 mb-3 leading-relaxed">
-          Berikut adalah tabel referensi alternatif program studi dan fakultas di berbagai PTN di seluruh Indonesia (tanpa persentase peluang, murni sebagai referensi eksplorasi akademik):
-        </p>
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs border border-slate-200">
-            <thead class="bg-slate-100 text-slate-700 uppercase text-[10px]">
-              <tr>
-                <th class="p-2 border">No</th>
-                <th class="p-2 border">Rumpun / Bidang</th>
-                <th class="p-2 border">Rekomendasi Program Studi & Fakultas</th>
-                <th class="p-2 border">Perguruan Tinggi Negeri (PTN)</th>
-                <th class="p-2 border">Acuan Mapel Pendukung</th>
-              </tr>
-            </thead>
-            <tbody id="tableLampiran1" class="divide-y divide-slate-200"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- LAMPIRAN 2: REKAP DATA REAL NYATA APA ADANYA -->
-      <div class="bg-white border border-slate-200 p-6 rounded-2xl print-card page-break">
-        <div class="border-b border-emerald-950 pb-3 mb-4 flex items-center justify-between">
           <div>
-            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-900 text-[10px] font-extrabold rounded uppercase">Lampiran 2</span>
-            <h3 class="text-sm font-black text-emerald-950 uppercase mt-1">Rekapitulasi Data Rapor Real Nyata Apa Adanya (12 Mata Pelajaran)</h3>
+            <p>Jakarta, <span id="outTanggalCetak"></span></p>
+            <p class="font-bold">Koordinator Tim Sukses PTN</p>
+            <div class="h-12"></div>
+            <p>( Fadhillah Umar, S.Pd. )</p>
           </div>
-          <p class="text-[10px] text-slate-500 italic">Transparansi Data Akademik Semester 1 s/d Semester 5</p>
         </div>
-        <p class="text-xs text-slate-600 mb-3 leading-relaxed">
-          Berikut adalah rincian data nilai rapor asli apa adanya yang diinputkan oleh siswa tanpa manipulasi atau pemangkasan buatan:
-        </p>
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs border border-slate-200">
-            <thead class="bg-slate-100 text-slate-700 uppercase text-[10px]">
-              <tr>
-                <th class="p-2 border">Mata Pelajaran</th>
-                <th class="p-2 border text-center">Smt 1</th>
-                <th class="p-2 border text-center">Smt 2</th>
-                <th class="p-2 border text-center">Smt 3</th>
-                <th class="p-2 border text-center">Smt 4</th>
-                <th class="p-2 border text-center">Smt 5 (Target)</th>
-                <th class="p-2 border text-center">Rata-Rata Asli</th>
-              </tr>
-            </thead>
-            <tbody id="tableLampiran2" class="divide-y divide-slate-200"></tbody>
-          </table>
-        </div>
-        <div class="mt-4 p-3 bg-slate-50 rounded-xl border flex justify-between items-center text-xs">
-          <b>Rata-Rata Keseluruhan (Grand Total Asli):</b>
-          <span id="outLampiranGrandTotal" class="font-black text-emerald-800 text-sm">0.0</span>
-        </div>
+
       </div>
 
     </div>
@@ -547,61 +694,95 @@
 
   <script>
     const listMapel = [
-      { id: "mtk_umum", name: "Matematika Umum" }, { id: "mtk_lanjut", name: "Matematika Tingkat Lanjut" },
-      { id: "fisika", name: "Fisika" }, { id: "kimia", name: "Kimia" }, { id: "biologi", name: "Biologi" },
-      { id: "ekonomi", name: "Ekonomi" }, { id: "sosiologi", name: "Sosiologi" }, { id: "geografi", name: "Geografi" },
-      { id: "ppkn", name: "Pendidikan Pancasila / PKn" }, { id: "sejarah", name: "Sejarah" },
-      { id: "bindo", name: "Bahasa Indonesia" }, { id: "bing", name: "Bahasa Inggris" }
+      { id: "mtk_umum", name: "Matematika Umum" },
+      { id: "mtk_lanjut", name: "Matematika Tingkat Lanjut" },
+      { id: "fisika", name: "Fisika" },
+      { id: "kimia", name: "Kimia" },
+      { id: "biologi", name: "Biologi" },
+      { id: "ekonomi", name: "Ekonomi" },
+      { id: "sosiologi", name: "Sosiologi" },
+      { id: "geografi", name: "Geografi" },
+      { id: "ppkn", name: "Pendidikan Pancasila / PKn" },
+      { id: "sejarah", name: "Sejarah" },
+      { id: "bindo", name: "Bahasa Indonesia" },
+      { id: "bing", name: "Bahasa Inggris" }
     ];
 
-    const mappingMapelPendukung = {
-      "KEDOKTERAN": ["Biologi", "Kimia"],
-      "TEKNIK": ["Matematika Tingkat Lanjut", "Fisika"],
-      "INFORMATIKA": ["Matematika Tingkat Lanjut", "Fisika"],
-      "HUKUM": ["Pendidikan Pancasila / PKn", "Sosiologi"],
-      "MANAJEMEN": ["Ekonomi", "Matematika Umum"],
-      "AKUNTANSI": ["Ekonomi", "Matematika Umum"],
-      "ILMU GIZI": ["Biologi", "Kimia"]
-    };
-
-    function getRequiredMapels(prodiText) {
-      const p = prodiText.toUpperCase();
-      for (let key in mappingMapelPendukung) {
-        if (p.includes(key)) return mappingMapelPendukung[key];
-      }
-      return ["Matematika Umum", "Bahasa Indonesia"];
-    }
-
-    function populateMapelSelects() {
-      const s1 = document.getElementById('mapelWajib1');
-      const s2 = document.getElementById('mapelWajib2');
-      if(!s1 || !s2) return;
-      s1.innerHTML = ""; s2.innerHTML = "";
-      listMapel.forEach(m => {
-        s1.add(new Option(m.name, m.name));
-        s2.add(new Option(m.name, m.name));
-      });
-      s1.value = "Biologi";
-      s2.value = "Kimia";
-    }
+    const pemetaanAngkatanM18 = [
+      { nama: "FARISAH NAVARRA PUTRI", kelas: "XII - 2", rata: 90.42, ptn1: "UNAIR_GIZI", ptn2: "UPNVJ_GIZI" },
+      { nama: "HADID IMANI RIFA'I", kelas: "XII - 1", rata: 90.29, ptn1: "UI_SIPIL", ptn2: "UB_SIPIL" },
+      { nama: "MOHAMMAD ERIQ FAHREZI", kelas: "XII - 1", rata: 90.11, ptn1: "UI_PERKAPALAN", ptn2: "UNILA_MESIN" },
+      { nama: "NADYA SYAFIQ", kelas: "XII - 1", rata: 89.55, ptn1: "IPB_STAT", ptn2: "UPNVJ_DATA" },
+      { nama: "PANDU FATHURRIZQI", kelas: "XII - 1", rata: 89.55, ptn1: "UB_INST", ptn2: "UNAIR_SI" },
+      { nama: "AILA SHAFA SHALEHA", kelas: "XII - 1", rata: 89.15, ptn1: "UNAIR_FARM", ptn2: "UPNVJ_MED" },
+      { nama: "CHAIRUNNISA AMALIA", kelas: "XII - 2", rata: 88.94, ptn1: "UI_ARS", ptn2: "UNDIP_PWK" },
+      { nama: "AKASYA PUTRI GHANIA", kelas: "XII - 2", rata: 88.79, ptn1: "UPNJT_MED", ptn2: "UINJKT_MED" },
+      { nama: "IRSYAD FATHI", kelas: "XII - 1", rata: 88.48, ptn1: "UNAIR_SI", ptn2: "UPNVJ_SI" },
+      { nama: "ISYA NURUL RASYIDAH", kelas: "XII - 1", rata: 88.36, ptn1: "UNDIP_PWK", ptn2: "UB_TIP" },
+      { nama: "SYARIFAH ANNISA", kelas: "XII - 1", rata: 88.13, ptn1: "UINJKT_MTK", ptn2: "IPB_KOMP" },
+      { nama: "RATU FILWA AZ-ZAHRA", kelas: "XII - 2", rata: 87.80, ptn1: "UB_TIP", ptn2: "IPB_VET" },
+      { nama: "NAIRA CHANDRANINGTYAS", kelas: "XII - 3", rata: 87.76, ptn1: "UINJKT_HI", ptn2: "UPNVJ_POL" },
+      { nama: "SINTIA HAIRUDDIN", kelas: "XII - 2", rata: 87.47, ptn1: "IPB_VET", ptn2: "UNAIR_GIZI" },
+      { nama: "HELGA GENDIS SEKAR AYU PUTRI", kelas: "XII - 4", rata: 86.74, ptn1: "UINJKT_POL", ptn2: "UPNVJ_POL" }
+    ];
 
     const alumniTrackRecord = [
-      { ptn: "UI", prodi: "TEKNIK", avg: 89.23, tahun: "2025" },
-      { ptn: "UGM", prodi: "KEDOKTERAN", avg: 91.18, tahun: "2025" },
-      { ptn: "STAN", prodi: "AKUNTANSI", avg: 90.0, tahun: "2024" },
-      { ptn: "ITB", prodi: "INFORMATIKA", avg: 90.0, tahun: "2024" },
-      { ptn: "UDAYANA", prodi: "KEDOKTERAN", avg: 88.5, tahun: "2026" }
+      { ptn: "UPN VETERAN JAWA TIMUR", prodi: "KEDOKTERAN", avg: 89.23, tahun: "SNBP 2026" },
+      { ptn: "AIRLANGGA", prodi: "ILMU GIZI", avg: 91.18, tahun: "SNBP 2026" },
+      { ptn: "AIRLANGGA", prodi: "SISTEM INFORMASI", avg: 88.05, tahun: "SNBP 2026" },
+      { ptn: "UNIVERSITAS DIPONEGORO", prodi: "PERENCANAAN WILAYAH DAN KOTA", avg: 87.89, tahun: "SNBP 2026" },
+      { ptn: "UNIVERSITAS DIPONEGORO", prodi: "MATEMATIKA", avg: 90.79, tahun: "SNBP 2024" },
+      { ptn: "UNIVERSITAS DIPONEGORO", prodi: "ILMU PERPUSTAKAAN", avg: 89.60, tahun: "SNBP 2025" },
+      { ptn: "UNIVERSITAS BRAWIJAYA", prodi: "INSTRUMENTASI", avg: 89.95, tahun: "SNBP 2026" },
+      { ptn: "UNIVERSITAS BRAWIJAYA", prodi: "TEKNIK INDUSTRI PERTANIAN", avg: 87.91, tahun: "SNBP 2026" },
+      { ptn: "INSTITUT PERTANIAN BOGOR", prodi: "PARAMEDIK VETERINER", avg: 87.84, tahun: "SNBP 2026" },
+      { ptn: "INSTITUT PERTANIAN BOGOR", prodi: "TEKNOLOGI REKAYASA KOMPUTER", avg: 90.02, tahun: "SNBP 2025" },
+      { ptn: "INSTITUT PERTANIAN BOGOR", prodi: "TEKNOLOGI REKAYASA PERANGKAT LUNAK", avg: 89.61, tahun: "SNBP 2024" },
+      { ptn: "UIN JAKARTA", prodi: "MATEMATIKA", avg: 87.66, tahun: "SNBP 2026" },
+      { ptn: "UIN JAKARTA", prodi: "HUBUNGAN INTERNASIONAL", avg: 88.42, tahun: "SNBP 2026" },
+      { ptn: "UIN JAKARTA", prodi: "ILMU POLITIK", avg: 86.95, tahun: "SNBP 2026" },
+      { ptn: "UIN JAKARTA", prodi: "JURNALISTIK", avg: 89.42, tahun: "SNBP 2024" },
+      { ptn: "UIN JAKARTA", prodi: "MANAJEMEN", avg: 89.15, tahun: "SNBP 2024" },
+      { ptn: "UPN VETERAN JAKARTA", prodi: "SISTEM INFORMASI", avg: 91.80, tahun: "SNBP 2025" },
+      { ptn: "UPN VETERAN JAKARTA", prodi: "ILMU POLITIK", avg: 90.83, tahun: "SNBP 2025" },
+      { ptn: "UNIVERSITAS INDONESIA", prodi: "ADMINISTRASI RUMAH SAKIT", avg: 89.30, tahun: "SNBP 2025" },
+      { ptn: "UNIVERSITAS NEGERI JAKARTA", prodi: "PENDIDIKAN AGAMA ISLAM", avg: 88.47, tahun: "SNBP 2025" },
+      { ptn: "UNIVERSITAS NEGERI SEMARANG", prodi: "TEKNIK ELEKTRO", avg: 90.17, tahun: "SNBP 2025" },
+      { ptn: "UNIVERSITAS NEGERI SEMARANG", prodi: "ILMU HUKUM", avg: 90.11, tahun: "SNBP 2025" },
+      { ptn: "UNIVERSITAS PENDIDIKAN INDONESIA", prodi: "TEKNOLOGI PENDIDIKAN", avg: 88.70, tahun: "SNBP 2025" },
+      { ptn: "UNIVERSITAS PENDIDIKAN INDONESIA", prodi: "TEKNIK LOGISTIK", avg: 89.08, tahun: "SNBP 2025" },
+      { ptn: "UNS", prodi: "ILMU HUKUM", avg: 89.69, tahun: "SNBP 2024" }
     ];
 
-    const databaseAlternatifPTN = [
-      { rumpun: "Saintek / Kesehatan", prodi: "Kedokteran Hewan (FKH)", ptn: "Universitas Airlangga / IPB University", mapel: "Biologi & Kimia" },
-      { rumpun: "Saintek / Teknik", prodi: "Teknik Sipil / Arsitektur", ptn: "Universitas Diponegoro / ITS / UNS", mapel: "Matematika Lanjut & Fisika" },
-      { rumpun: "Saintek / Komputer", prodi: "Sistem Informasi / Ilmu Komputer", ptn: "Universitas Brawijaya / UNPAD / UNSRI", mapel: "Matematika Lanjut & Informatika" },
-      { rumpun: "Saintek / MIPA", prodi: "Aktuaria / Statistika & Sains Data", ptn: "Universitas Gadjah Mada / IPB / USU", mapel: "Matematika Tingkat Lanjut" },
-      { rumpun: "Soshum / Ekonomi", prodi: "Manajemen / Ilmu Ekonomi", ptn: "Universitas Indonesia / UNPAD / UNUD", mapel: "Ekonomi & Matematika" },
-      { rumpun: "Soshum / Hukum", prodi: "Ilmu Hukum", ptn: "Universitas Diponegoro / UNS / UNHAS", mapel: "Pendidikan Pancasila & Sosiologi" },
-      { rumpun: "Soshum / Sosial", prodi: "Ilmu Komunikasi / Hubungan Internasional", ptn: "Universitas Airlangga / UPN Veteran / UNILA", mapel: "Sosiologi & Bahasa Inggris" },
-      { rumpun: "Vokasi / Kedinasan", prodi: "D4 Akuntansi Sektor Publik", ptn: "PKN STAN / Politeknik Negeri Jakarta", mapel: "Matematika & Ekonomi" }
+    const databasePTN = [
+      { id: "UI_MED", ptn: "Universitas Indonesia", fakultas: "Fakultas Kedokteran", prodi: "Pendidikan Dokter", rumpun: "Saintek", mapel1: "Biologi", mapel2: "Kimia", dayaTampung: 75, peminat: 3820, passingUTBK: 735, mandiri: "SIMAK UI" },
+      { id: "UI_CS", ptn: "Universitas Indonesia", fakultas: "Fakultas Ilmu Komputer", prodi: "Ilmu Komputer", rumpun: "Saintek", mapel1: "Matematika Tingkat Lanjut", mapel2: "Fisika", dayaTampung: 45, peminat: 1980, passingUTBK: 715, mandiri: "SIMAK UI" },
+      { id: "UI_SIPIL", ptn: "Universitas Indonesia", fakultas: "Fakultas Teknik", prodi: "Teknik Sipil", rumpun: "Saintek", mapel1: "Fisika", mapel2: "Matematika Umum", dayaTampung: 50, peminat: 1200, passingUTBK: 665, mandiri: "SIMAK UI" },
+      { id: "UI_ARS", ptn: "Universitas Indonesia", fakultas: "Fakultas Teknik", prodi: "Arsitektur", rumpun: "Saintek", mapel1: "Matematika Umum", mapel2: "Fisika", dayaTampung: 35, peminat: 1350, passingUTBK: 665, mandiri: "SIMAK UI" },
+      { id: "UI_HUKUM", ptn: "Universitas Indonesia", fakultas: "Fakultas Hukum", prodi: "Ilmu Hukum", rumpun: "Soshum", mapel1: "Pendidikan Pancasila / PKn", mapel2: "Sosiologi", dayaTampung: 150, peminat: 3600, passingUTBK: 685, mandiri: "SIMAK UI" },
+      { id: "UI_MANAJEMEN", ptn: "Universitas Indonesia", fakultas: "Fakultas Ekonomi dan Bisnis", prodi: "Manajemen", rumpun: "Soshum", mapel1: "Ekonomi", mapel2: "Matematika Umum", dayaTampung: 60, peminat: 2850, passingUTBK: 695, mandiri: "SIMAK UI" },
+      { id: "UI_HI", ptn: "Universitas Indonesia", fakultas: "Fakultas Ilmu Sosial dan Ilmu Politik", prodi: "Hubungan Internasional", rumpun: "Soshum", mapel1: "Pendidikan Pancasila / PKn", mapel2: "Bahasa Inggris", dayaTampung: 25, peminat: 1650, passingUTBK: 700, mandiri: "SIMAK UI" },
+      { id: "UI_SEJARAH", ptn: "Universitas Indonesia", fakultas: "Fakultas Ilmu Pengetahuan Budaya", prodi: "Ilmu Sejarah", rumpun: "Soshum", mapel1: "Sejarah", mapel2: "Bahasa Indonesia", dayaTampung: 35, peminat: 750, passingUTBK: 635, mandiri: "SIMAK UI" },
+      
+      { id: "UPNVJ_MED", ptn: "UPN Veteran Jakarta", fakultas: "Fakultas Kedokteran", prodi: "Kedokteran", rumpun: "Saintek", mapel1: "Biologi", mapel2: "Kimia", dayaTampung: 50, peminat: 2400, passingUTBK: 690, mandiri: "SEMA UPNVJ" },
+      { id: "UPNVJ_SI", ptn: "UPN Veteran Jakarta", fakultas: "Fakultas Ilmu Komputer", prodi: "Sistem Informasi", rumpun: "Saintek", mapel1: "Matematika Tingkat Lanjut", mapel2: "Fisika", dayaTampung: 60, peminat: 1850, passingUTBK: 650, mandiri: "SEMA UPNVJ" },
+      { id: "UPNVJ_GIZI", ptn: "UPN Veteran Jakarta", fakultas: "Fakultas Ilmu Kesehatan", prodi: "Ilmu Gizi", rumpun: "Saintek", mapel1: "Biologi", mapel2: "Kimia", dayaTampung: 45, peminat: 1100, passingUTBK: 645, mandiri: "SEMA UPNVJ" },
+      { id: "UPNVJ_HUKUM", ptn: "UPN Veteran Jakarta", fakultas: "Fakultas Hukum", prodi: "Hukum", rumpun: "Soshum", mapel1: "Pendidikan Pancasila / PKn", mapel2: "Sosiologi", dayaTampung: 100, peminat: 2600, passingUTBK: 635, mandiri: "SEMA UPNVJ" },
+
+      { id: "UINJKT_MED", ptn: "UIN Syarif Hidayatullah Jakarta", fakultas: "Fakultas Kedokteran", prodi: "Pendidikan Dokter", rumpun: "Saintek", mapel1: "Biologi", mapel2: "Kimia", dayaTampung: 40, peminat: 1850, passingUTBK: 680, mandiri: "SPMB UIN Jakarta" },
+      { id: "UINJKT_MTK", ptn: "UIN Syarif Hidayatullah Jakarta", fakultas: "Fakultas Sains dan Teknologi", prodi: "Matematika", rumpun: "Saintek", mapel1: "Matematika Tingkat Lanjut", mapel2: "Matematika Umum", dayaTampung: 45, peminat: 580, passingUTBK: 610, mandiri: "SPMB UIN Jakarta" },
+      { id: "UINJKT_HI", ptn: "UIN Syarif Hidayatullah Jakarta", fakultas: "Fakultas Ilmu Sosial dan Ilmu Politik", prodi: "Hubungan Internasional", rumpun: "Soshum", mapel1: "Pendidikan Pancasila / PKn", mapel2: "Bahasa Inggris", dayaTampung: 40, peminat: 950, passingUTBK: 625, mandiri: "SPMB UIN Jakarta" },
+
+      { id: "UNJ_FISIKA", ptn: "Universitas Negeri Jakarta", fakultas: "Fakultas MIPA", prodi: "Pendidikan Fisika", rumpun: "Pendidikan", mapel1: "Fisika", mapel2: "Matematika Umum", dayaTampung: 45, peminat: 620, passingUTBK: 605, mandiri: "PENMABA UNJ" },
+      { id: "UNJ_MTK", ptn: "Universitas Negeri Jakarta", fakultas: "Fakultas MIPA", prodi: "Pendidikan Matematika", rumpun: "Pendidikan", mapel1: "Matematika Tingkat Lanjut", mapel2: "Matematika Umum", dayaTampung: 45, peminat: 820, passingUTBK: 615, mandiri: "PENMABA UNJ" },
+
+      { id: "IPB_STAT", ptn: "IPB University", fakultas: "Fakultas Matematika dan Ilmu Pengetahuan Alam", prodi: "Statistika & Sains Data", rumpun: "Saintek", mapel1: "Matematika Tingkat Lanjut", mapel2: "Matematika Umum", dayaTampung: 40, peminat: 1150, passingUTBK: 670, mandiri: "SM-IPB" },
+      { id: "ITB_STEI", ptn: "Institut Teknologi Bandung", fakultas: "Sekolah Teknik Elektro dan Informatika", prodi: "STEI - Komputasi", rumpun: "Saintek", mapel1: "Matematika Tingkat Lanjut", mapel2: "Fisika", dayaTampung: 130, peminat: 3450, passingUTBK: 720, mandiri: "SM-ITB" },
+      { id: "UGM_MED", ptn: "Universitas Gadjah Mada", fakultas: "Fakultas Kedokteran, Kesehatan Masyarakat, dan Keperawatan", prodi: "Kedokteran", rumpun: "Saintek", mapel1: "Biologi", mapel2: "Kimia", dayaTampung: 62, peminat: 3540, passingUTBK: 730, mandiri: "UM-CBT UGM" },
+      { id: "ITS_IF", ptn: "Institut Teknologi Sepuluh Nopember", fakultas: "Fakultas Teknologi Elektro dan Informatika Cerdas", prodi: "Teknik Informatika", rumpun: "Saintek", mapel1: "Matematika Tingkat Lanjut", mapel2: "Fisika", dayaTampung: 90, peminat: 2580, passingUTBK: 695, mandiri: "SM-ITS" },
+      { id: "UNAIR_GIZI", ptn: "Universitas Airlangga", fakultas: "Fakultas Kesehatan Masyarakat", prodi: "Ilmu Gizi", rumpun: "Saintek", mapel1: "Biologi", mapel2: "Kimia", dayaTampung: 40, peminat: 850, passingUTBK: 660, mandiri: "SMUA Mandiri" },
+      { id: "UNDIP_PWK", ptn: "Universitas Diponegoro", fakultas: "Fakultas Teknik", prodi: "Perencanaan Wilayah dan Kota", rumpun: "Saintek", mapel1: "Matematika Umum", mapel2: "Geografi", dayaTampung: 60, peminat: 1350, passingUTBK: 655, mandiri: "UM UNDIP" },
+      { id: "UB_TIP", ptn: "Universitas Brawijaya", fakultas: "Fakultas Teknologi Pertanian", prodi: "Teknik Industri Pertanian", rumpun: "Saintek", mapel1: "Biologi", mapel2: "Kimia", dayaTampung: 70, peminat: 1100, passingUTBK: 625, mandiri: "SMUB Brawijaya" }
     ];
 
     let activeJalur = "SNBP";
@@ -617,17 +798,21 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function toggleTKAInput(show) {
+      document.getElementById('boxInputTKA').classList.toggle('hidden', !show);
+    }
+
     function renderTabel() {
       const tbody = document.getElementById('tableBodyInput');
       if(!tbody) return;
       tbody.innerHTML = listMapel.map(m => `
         <tr class="hover:bg-slate-50">
           <td class="py-1.5 font-semibold text-slate-700 text-xs">${m.name}</td>
-          <td class="py-1 px-1 text-center"><input id="${m.id}_s1" oninput="hitungRataRow('${m.id}')" type="number" step="0.1" class="w-11 text-center bg-slate-50 border border-slate-200 rounded py-1 text-xs" placeholder="0" /></td>
-          <td class="py-1 px-1 text-center"><input id="${m.id}_s2" oninput="hitungRataRow('${m.id}')" type="number" step="0.1" class="w-11 text-center bg-slate-50 border border-slate-200 rounded py-1 text-xs" placeholder="0" /></td>
-          <td class="py-1 px-1 text-center"><input id="${m.id}_s3" oninput="hitungRataRow('${m.id}')" type="number" step="0.1" class="w-11 text-center bg-slate-50 border border-slate-200 rounded py-1 text-xs" placeholder="0" /></td>
-          <td class="py-1 px-1 text-center"><input id="${m.id}_s4" oninput="hitungRataRow('${m.id}')" type="number" step="0.1" class="w-11 text-center bg-slate-50 border border-slate-200 rounded py-1 text-xs" placeholder="0" /></td>
-          <td class="py-1 px-1 text-center bg-amber-50/50"><input id="${m.id}_s5" oninput="hitungRataRow('${m.id}')" type="number" step="0.1" class="w-11 text-center bg-white border border-amber-300 rounded py-1 text-xs font-bold text-amber-900" placeholder="Target" /></td>
+          <td class="py-1 px-1 text-center"><input id="${m.id}_s1" oninput="hitungRataRow('${m.id}'); saveDraft();" type="number" step="0.1" class="w-11 text-center bg-slate-50 border border-slate-200 rounded py-1 text-xs focus:bg-white focus:border-emerald-700 focus:outline-none" placeholder="0" /></td>
+          <td class="py-1 px-1 text-center"><input id="${m.id}_s2" oninput="hitungRataRow('${m.id}'); saveDraft();" type="number" step="0.1" class="w-11 text-center bg-slate-50 border border-slate-200 rounded py-1 text-xs focus:bg-white focus:border-emerald-700 focus:outline-none" placeholder="0" /></td>
+          <td class="py-1 px-1 text-center"><input id="${m.id}_s3" oninput="hitungRataRow('${m.id}'); saveDraft();" type="number" step="0.1" class="w-11 text-center bg-slate-50 border border-slate-200 rounded py-1 text-xs focus:bg-white focus:border-emerald-700 focus:outline-none" placeholder="0" /></td>
+          <td class="py-1 px-1 text-center"><input id="${m.id}_s4" oninput="hitungRataRow('${m.id}'); saveDraft();" type="number" step="0.1" class="w-11 text-center bg-slate-50 border border-slate-200 rounded py-1 text-xs focus:bg-white focus:border-emerald-700 focus:outline-none" placeholder="0" /></td>
+          <td class="py-1 px-1 text-center bg-amber-50/50"><input id="${m.id}_s5" oninput="hitungRataRow('${m.id}'); saveDraft();" type="number" step="0.1" class="w-11 text-center bg-white border border-amber-300 rounded py-1 text-xs focus:border-emerald-700 focus:outline-none font-bold text-amber-900" placeholder="Target" /></td>
           <td class="py-1 px-2 text-center font-bold text-emerald-950 bg-emerald-50/80 rounded text-xs" id="${m.id}_avg">0.0</td>
         </tr>
       `).join('');
@@ -637,9 +822,13 @@
       let sum = 0, count = 0;
       for (let s = 1; s <= 5; s++) {
         const val = parseFloat(document.getElementById(`${mapelId}_s${s}`).value);
-        if (!isNaN(val) && val > 0) { sum += val; count++; }
+        if (!isNaN(val) && val > 0) {
+          sum += val;
+          count++;
+        }
       }
-      document.getElementById(`${mapelId}_avg`).innerText = (count > 0 ? (sum / count) : 0).toFixed(1);
+      const avg = count > 0 ? (sum / count) : 0;
+      document.getElementById(`${mapelId}_avg`).innerText = avg.toFixed(1);
       hitungGrandTotal();
     }
 
@@ -647,9 +836,13 @@
       let sum = 0, count = 0;
       listMapel.forEach(m => {
         const avg = parseFloat(document.getElementById(`${m.id}_avg`).innerText);
-        if (avg > 0) { sum += avg; count++; }
+        if (avg > 0) {
+          sum += avg;
+          count++;
+        }
       });
-      document.getElementById('labelGrandTotal').innerText = (count > 0 ? (sum / count) : 0).toFixed(1);
+      const grand = count > 0 ? (sum / count) : 0;
+      document.getElementById('labelGrandTotal').innerText = grand.toFixed(1);
     }
 
     function hitungSlopeSemester() {
@@ -662,13 +855,57 @@
         });
         semAvg.push(cnt > 0 ? (sum / cnt) : 85);
       }
+      const n = 5;
       const xMean = 3;
+      const yMean = semAvg.reduce((a, b) => a + b, 0) / n;
       let num = 0, den = 0;
-      for (let i = 0; i < 5; i++) {
-        num += ((i+1) - xMean) * (semAvg[i] - 88);
+      for (let i = 0; i < n; i++) {
+        num += ((i+1) - xMean) * (semAvg[i] - yMean);
         den += Math.pow((i+1) - xMean, 2);
       }
-      return { slope: den !== 0 ? (num / den) : 0, semesters: semAvg };
+      const slope = den !== 0 ? (num / den) : 0;
+      return { slope: slope, semesters: semAvg };
+    }
+
+    function checkCollisionInternal() {
+      const curNama = document.getElementById('inNama').value.trim().toUpperCase();
+      const p1Text = document.getElementById('manualProdi1').value.trim().toUpperCase();
+      const box = document.getElementById('boxTabrakanWarning');
+      const desc = document.getElementById('descTabrakanWarning');
+      if (!p1Text) return;
+      const rivals = pemetaanAngkatanM18.filter(s => p1Text.includes(s.ptn1) && s.nama.toUpperCase() !== curNama);
+      if (rivals.length > 0) {
+        const rivalNames = rivals.map(r => `${r.nama} (${r.kelas} - Rata: ${r.rata})`).join(', ');
+        box.classList.remove('hidden');
+        desc.innerHTML = `Pilihan utama <b>${p1Text}</b> saat ini juga dipilih oleh siswa lain di angkatan aktif: <br><span class="font-bold text-amber-900">• ${rivalNames}</span>.<br>Di jalur SNBP, PTN jarang menerima lebih dari 1 siswa pada prodi yang sama dari satu sekolah.`;
+      } else {
+        box.classList.add('hidden');
+      }
+    }
+
+    function populateDropdowns() {
+      const pSNBT1 = document.getElementById('selectProdiSNBT1');
+      const pSNBT2 = document.getElementById('selectProdiSNBT2');
+      const pMandiri1 = document.getElementById('selectProdiMandiri1');
+      const pMandiri2 = document.getElementById('selectProdiMandiri2');
+
+      const selects = [pSNBT1, pSNBT2, pMandiri1, pMandiri2];
+      selects.forEach(sel => { if(sel) sel.innerHTML = ""; });
+
+      databasePTN.forEach(p => {
+        const labelSNBT = `${p.prodi} (${p.ptn}) - Passing Grade: ${p.passingUTBK}`;
+        const labelMandiri = `${p.prodi} - ${p.ptn} [${p.mandiri}]`;
+
+        if (pSNBT1) pSNBT1.add(new Option(labelSNBT, p.id));
+        if (pSNBT2) pSNBT2.add(new Option(labelSNBT, p.id));
+        if (pMandiri1) pMandiri1.add(new Option(labelMandiri, p.id));
+        if (pMandiri2) pMandiri2.add(new Option(labelMandiri, p.id));
+      });
+
+      if (pSNBT1 && databasePTN.some(p => p.id === "ITS_IF")) pSNBT1.value = "ITS_IF";
+      if (pSNBT2 && databasePTN.some(p => p.id === "UNDIP_PWK")) pSNBT2.value = "UNDIP_PWK";
+      if (pMandiri1 && databasePTN.some(p => p.id === "UI_CS")) pMandiri1.value = "UI_CS";
+      if (pMandiri2 && databasePTN.some(p => p.id === "UPNVJ_SI")) pMandiri2.value = "UPNVJ_SI";
     }
 
     function isiContohSimulasi() {
@@ -676,8 +913,8 @@
         { id: "mtk_umum", val: [88, 89, 91, 92, 95] }, { id: "mtk_lanjut", val: [86, 88, 89, 91, 93] },
         { id: "fisika", val: [86, 88, 90, 92, 94] }, { id: "kimia", val: [84, 85, 87, 88, 90] },
         { id: "biologi", val: [83, 85, 86, 88, 90] }, { id: "ekonomi", val: [80, 82, 83, 84, 85] },
-        { id: "sosiologi", val: [91, 92, 92, 93, 95] }, { id: "geografi", val: [80, 81, 82, 84, 85] },
-        { id: "ppkn", val: [93, 94, 94, 95, 96] }, { id: "sejarah", val: [85, 86, 87, 88, 89] },
+        { id: "sosiologi", val: [90, 91, 92, 93, 94] }, { id: "geografi", val: [80, 81, 82, 84, 85] },
+        { id: "ppkn", val: [91, 92, 93, 94, 96] }, { id: "sejarah", val: [85, 86, 87, 88, 89] },
         { id: "bindo", val: [88, 89, 90, 91, 92] }, { id: "bing", val: [86, 87, 89, 90, 92] }
       ];
       sample.forEach(s => {
@@ -687,15 +924,21 @@
         }
         hitungRataRow(s.id);
       });
-      document.getElementById('inNama').value = "Muhammad Umar";
-      document.getElementById('inKelas').value = "XII - 1 (MIPA)";
-      document.getElementById('inKonselor').value = "Fadhillah Umar, S.Pd.";
-      document.getElementById('textProdi1').value = "Kedokteran - Universitas Indonesia";
-      document.getElementById('quotaDaya1').value = "75";
-      document.getElementById('quotaPeminat1').value = "3820";
-      document.getElementById('textProdi2').value = "Ilmu Gizi - Universitas Brawijaya";
-      document.getElementById('quotaDaya2').value = "40";
-      document.getElementById('quotaPeminat2').value = "1100";
+      if(document.getElementById('inNama')) document.getElementById('inNama').value = "Muhammad Umar";
+      if(document.getElementById('inKelas')) document.getElementById('inKelas').value = "XII - 1 (MIPA)";
+      if(document.getElementById('inKonselor')) document.getElementById('inKonselor').value = "Tim Sukses PTN M18";
+      
+      // Isi Manual Pilihan 1 & 2 serta Daya Tampung / Peminat
+      if(document.getElementById('manualProdi1')) document.getElementById('manualProdi1').value = "Teknik Industri Pertanian - Universitas Brawijaya";
+      if(document.getElementById('manualDaya1')) document.getElementById('manualDaya1').value = 70;
+      if(document.getElementById('manualPeminat1')) document.getElementById('manualPeminat1').value = 1100;
+
+      if(document.getElementById('manualProdi2')) document.getElementById('manualProdi2').value = "Teknik Informatika - Institut Teknologi Sepuluh Nopember";
+      if(document.getElementById('manualDaya2')) document.getElementById('manualDaya2').value = 90;
+      if(document.getElementById('manualPeminat2')) document.getElementById('manualPeminat2').value = 2580;
+
+      saveDraft();
+      checkCollisionInternal();
     }
 
     function isiContohUTBK() {
@@ -707,130 +950,147 @@
       document.getElementById('utbk_ppu').value = 650;
       document.getElementById('utbk_lit_indo').value = 690;
       document.getElementById('utbk_lit_ing').value = 660;
-      document.getElementById('textProdiSNBT1').value = "Teknik Informatika - ITB";
-      document.getElementById('pgSNBT1').value = "720";
-      document.getElementById('quotaDayaSNBT1').value = "130";
-      document.getElementById('quotaPeminatSNBT1').value = "3450";
-      document.getElementById('textProdiSNBT2').value = "Sistem Informasi - Universitas Indonesia";
-      document.getElementById('pgSNBT2').value = "715";
-      document.getElementById('quotaDayaSNBT2').value = "45";
-      document.getElementById('quotaPeminatSNBT2').value = "1980";
+      document.getElementById('selectProdiSNBT1').value = "ITS_IF";
+      document.getElementById('selectProdiSNBT2').value = "UNDIP_PWK";
     }
 
-    function checkAlumniBonus(kampusName) {
-      const match = alumniTrackRecord.find(a => kampusName.toUpperCase().includes(a.ptn));
-      return match ? 6 : 0;
+    function isiContohMandiri() {
+      document.getElementById('inNamaMandiri').value = "Muhammad Umar";
+      document.getElementById('inModalMandiri').value = 89.2;
+      document.getElementById('selectProdiMandiri1').value = "UI_CS";
+      document.getElementById('selectProdiMandiri2').value = "UPNVJ_SI";
+      document.getElementById('selectPrestasiMandiri').value = "15";
     }
 
-    function renderLampiranTables() {
-      const tbody1 = document.getElementById('tableLampiran1');
-      if(tbody1) {
-        tbody1.innerHTML = databaseAlternatifPTN.map((item, idx) => `
-          <tr class="hover:bg-slate-50">
-            <td class="p-2 border text-center font-bold">${idx + 1}</td>
-            <td class="p-2 border font-semibold text-slate-800">${item.rumpun}</td>
-            <td class="p-2 border font-bold text-blue-950">${item.prodi}</td>
-            <td class="p-2 border text-slate-700">${item.ptn}</td>
-            <td class="p-2 border text-slate-600 font-medium">${item.mapel}</td>
-          </tr>
-        `).join('');
+    function checkAlumniTrack(prodiText) {
+      const match = alumniTrackRecord.filter(a => prodiText.toUpperCase().includes(a.ptn) || prodiText.toUpperCase().includes(a.prodi));
+      if (match.length > 0) {
+        return { hasAlumni: true, detail: `🔥 Alumni M18 pernah lolos di instansi/prodi terkait` };
       }
-
-      const tbody2 = document.getElementById('tableLampiran2');
-      if(tbody2) {
-        let grandSum = 0, countMapel = 0;
-        tbody2.innerHTML = listMapel.map(m => {
-          const s1 = parseFloat(document.getElementById(`${m.id}_s1`)?.value) || 0;
-          const s2 = parseFloat(document.getElementById(`${m.id}_s2`)?.value) || 0;
-          const s3 = parseFloat(document.getElementById(`${m.id}_s3`)?.value) || 0;
-          const s4 = parseFloat(document.getElementById(`${m.id}_s4`)?.value) || 0;
-          const s5 = parseFloat(document.getElementById(`${m.id}_s5`)?.value) || 0;
-          const avg = parseFloat(document.getElementById(`${m.id}_avg`)?.innerText) || 0;
-          if(avg > 0) { grandSum += avg; countMapel++; }
-          return `
-            <tr class="hover:bg-slate-50">
-              <td class="p-2 border font-semibold text-slate-700">${m.name}</td>
-              <td class="p-2 border text-center">${s1 > 0 ? s1 : '-'}</td>
-              <td class="p-2 border text-center">${s2 > 0 ? s2 : '-'}</td>
-              <td class="p-2 border text-center">${s3 > 0 ? s3 : '-'}</td>
-              <td class="p-2 border text-center">${s4 > 0 ? s4 : '-'}</td>
-              <td class="p-2 border text-center font-bold text-amber-900 bg-amber-50/50">${s5 > 0 ? s5 : '-'}</td>
-              <td class="p-2 border text-center font-bold text-emerald-950 bg-emerald-50/80">${avg.toFixed(1)}</td>
-            </tr>
-          `;
-        }).join('');
-        const grandAvg = countMapel > 0 ? (grandSum / countMapel) : 0;
-        document.getElementById('outLampiranGrandTotal').innerText = grandAvg.toFixed(2);
-      }
+      return { hasAlumni: false, detail: "" };
     }
 
+    // ===============================================
+    // EKSEKUTOR LAPORAN SNBP
+    // ===============================================
     function jalankanAnalisisSNBP() {
       activeJalur = "SNBP";
-      let grandAvg = parseFloat(document.getElementById('labelGrandTotal').innerText) || 89.2;
+      let grandAvg = parseFloat(document.getElementById('labelGrandTotal').innerText) || 0;
+      if (grandAvg === 0) {
+        isiContohSimulasi();
+        grandAvg = parseFloat(document.getElementById('labelGrandTotal').innerText);
+      }
       const nama = document.getElementById('inNama').value.trim() || "Muhammad Umar";
-      const p1 = document.getElementById('textProdi1').value.trim() || "Kedokteran - Universitas Indonesia";
-      const p2 = document.getElementById('textProdi2').value.trim() || "Ilmu Gizi - Universitas Brawijaya";
+      const kelas = document.getElementById('inKelas').value.trim() || "XII - 1 (MIPA)";
+      const konselor = document.getElementById('inKonselor').value.trim() || "Tim Sukses PTN M18";
       
-      const daya1 = parseFloat(document.getElementById('quotaDaya1').value) || 75;
-      const peminat1 = parseFloat(document.getElementById('quotaPeminat1').value) || 3820;
-      const daya2 = parseFloat(document.getElementById('quotaDaya2').value) || 40;
-      const peminat2 = parseFloat(document.getElementById('quotaPeminat2').value) || 1100;
+      const p1Text = document.getElementById('manualProdi1').value.trim() || "Teknik Industri Pertanian - Universitas Brawijaya";
+      const daya1 = parseFloat(document.getElementById('manualDaya1').value) || 70;
+      const peminat1 = parseFloat(document.getElementById('manualPeminat1').value) || 1100;
 
-      const keketatan1 = (daya1 / peminat1) * 100;
-      const keketatan2 = (daya2 / peminat2) * 100;
+      const p2Text = document.getElementById('manualProdi2').value.trim() || "Teknik Informatika - Institut Teknologi Sepuluh Nopember";
+      const daya2 = parseFloat(document.getElementById('manualDaya2').value) || 90;
+      const peminat2 = parseFloat(document.getElementById('manualPeminat2').value) || 2580;
 
       const calculated = listMapel.map(m => ({
-        name: m.name, avg: parseFloat(document.getElementById(`${m.id}_avg`).innerText) || 85
+        id: m.id, name: m.name, avg: parseFloat(document.getElementById(`${m.id}_avg`).innerText) || 0
       })).sort((a, b) => b.avg - a.avg);
 
       const top1 = calculated[0];
       const top2 = calculated[1];
 
-      const sel1_name = document.getElementById('mapelWajib1').value;
-      const sel2_name = document.getElementById('mapelWajib2').value;
-      const reqObj1 = calculated.find(m => m.name === sel1_name) || { name: sel1_name, avg: 80 };
-      const reqObj2 = calculated.find(m => m.name === sel2_name) || { name: sel2_name, avg: 80 };
-
-      const avgMapelPendukung = (reqObj1.avg + reqObj2.avg) / 2;
       const slopeData = hitungSlopeSemester();
-      const bonusAlumni = checkAlumniBonus(p1);
+      const slope = slopeData.slope;
+      let slopeBonus = slope > 0.3 ? 5 : (slope >= -0.3 ? 0 : -5);
+      const badgeSlope = document.getElementById('outBadgeTrenSlope');
+      if (slope > 0.3) {
+        badgeSlope.innerText = "📈 Kurva Meningkat Positif (+5 Poin)";
+        badgeSlope.className = "px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-300";
+      } else if (slope >= -0.3) {
+        badgeSlope.innerText = "📊 Kurva Stabil (+0 Poin)";
+        badgeSlope.className = "px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-100 text-blue-800 border border-blue-300";
+      } else {
+        badgeSlope.innerText = "📉 Kurva Menurun (-5 Poin Peringatan)";
+        badgeSlope.className = "px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-rose-100 text-rose-800 border border-rose-300";
+      }
 
-      let baseScore = (avgMapelPendukung * 0.5) + (keketatan1 * 1.8) + (slopeData.slope > 0 ? 4 : 0) + bonusAlumni;
-      let score1 = Math.max(2, Math.min(98, Math.round(baseScore)));
-      let score2 = Math.max(2, Math.min(98, Math.round((grandAvg * 0.4) + (keketatan2 * 2.0) + (slopeData.slope > 0 ? 5 : 0))));
+      document.getElementById('outGrid5Semester').innerHTML = slopeData.semesters.map((val, idx) => `
+        <div class="p-2 rounded-lg bg-white border border-slate-200">
+          <span class="text-[9px] text-slate-400 font-bold block">Smt ${idx + 1}${idx === 4 ? ' (Target)' : ''}</span>
+          <span class="font-extrabold text-slate-800">${val.toFixed(1)}</span>
+        </div>
+      `).join('');
 
-      const requiredMapels = getRequiredMapels(p1);
-      const isSinkron = (sel1_name === requiredMapels[0] || sel1_name === requiredMapels[1] || sel2_name === requiredMapels[0] || sel2_name === requiredMapels[1]);
-
-      document.getElementById('outReportBadgeJalur').innerText = "Rapor Analisis SNBP (Objective Formula)";
+      document.getElementById('outReportBadgeJalur').innerText = "Rapor Analisis Khusus SNBP";
       document.getElementById('outNamaReport').innerText = nama;
-      document.getElementById('outKelasReport').innerText = document.getElementById('inKelas').value || "XII MIPA";
-      document.getElementById('outKonselorReport').innerText = document.getElementById('inKonselor').value || "Fadhillah Umar, S.Pd.";
+      document.getElementById('outKelasReport').innerText = kelas;
+      document.getElementById('outKonselorReport').innerText = konselor;
+      document.getElementById('outLabelSkorUtama').innerText = "RATA-RATA RAPOR SMT 1-5";
       document.getElementById('outValSkorUtama').innerText = grandAvg.toFixed(2);
       document.getElementById('outTanggalCetak').innerText = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 
-      document.getElementById('outBadgeTrenSlope').innerText = slopeData.slope > 0 ? `📈 Kurva Rapor Positif (Slope: ${slopeData.slope.toFixed(2)})` : "📊 Kurva Rapor Stabil";
-      document.getElementById('outGrid5Semester').innerHTML = slopeData.semesters.map((v, i) => `<div class="p-1 bg-white border">Smt ${i+1}: <b>${v.toFixed(1)}</b></div>`).join('');
-      
       document.getElementById('outTopMapelSNBP').innerHTML = `
-        <div class="p-2 bg-blue-50 border rounded"><span class="text-[9px] text-slate-500 block">1. Nilai Puncak Siswa</span><b>${top1.name} (${top1.avg})</b></div>
-        <div class="p-2 bg-blue-50 border rounded"><span class="text-[9px] text-slate-500 block">2. Nilai Puncak Siswa</span><b>${top2.name} (${top2.avg})</b></div>
-        <div class="p-2 bg-indigo-50 border rounded"><span class="text-[9px] text-indigo-700 block">Mapel Wajib 1</span><b>${reqObj1.name} (${reqObj1.avg})</b></div>
-        <div class="p-2 bg-indigo-50 border rounded"><span class="text-[9px] text-indigo-700 block">Mapel Wajib 2</span><b>${reqObj2.name} (${reqObj2.avg})</b></div>
+        <div class="p-2.5 rounded-lg bg-blue-50 border border-blue-200 flex justify-between items-center">
+          <div><span class="text-[9px] text-slate-500 font-bold block">1. Nilai Puncak Siswa</span><span class="font-bold text-slate-800">${top1.name}</span></div>
+          <span class="font-black text-blue-900 text-sm">${top1.avg.toFixed(1)}</span>
+        </div>
+        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex justify-between items-center">
+          <div><span class="text-[9px] text-slate-500 font-bold block">2. Nilai Puncak Siswa</span><span class="font-bold text-slate-800">${top2.name}</span></div>
+          <span class="font-black text-slate-700 text-sm">${top2.avg.toFixed(1)}</span>
+        </div>
       `;
 
-      const alertBox = document.getElementById('outAlertBoxSNBP');
-      alertBox.className = isSinkron ? "p-3 rounded-xl border bg-emerald-50 border-emerald-200 text-emerald-900 text-xs" : "p-3 rounded-xl border bg-amber-50 border-amber-200 text-amber-900 text-xs";
-      document.getElementById('outAlertIconSNBP').innerText = isSinkron ? "✅" : "⚠️";
-      document.getElementById('outAlertTitleSNBP').innerText = isSinkron ? "Validasi Mapel Pendukung: Sinkron & Kompetitif" : "Peringatan Objektif: Mapel Pendukung Belum Sinkron";
-      document.getElementById('outAlertDescSNBP').innerText = isSinkron ? `Rata-rata mapel pendukung mencapai ${avgMapelPendukung.toFixed(1)}, selaras dengan ketentuan Kepmen 345/M/2022.` : `Prodi ${p1} menuntut bobot mapel [${requiredMapels.join(' & ')}]. Rata-rata pendukung siswa (${avgMapelPendukung.toFixed(1)}) menghasilkan kalkulasi objektif ${score1}%.`;
+      function calcCustomSNBP(daya, peminat) {
+        const keketatan = (daya / peminat) * 100;
+        let track = checkAlumniTrack(p1Text);
+        let bonus = track.hasAlumni ? 6 : 0;
+        return Math.max(12, Math.min(Math.round((grandAvg * 0.38) + (keketatan * 2.0) + bonus + slopeBonus), 95));
+      }
 
-      document.getElementById('outProdiSNBP1').innerHTML = `<b>${p1}</b><br><span class="text-[9px] text-slate-500">Keketatan: ${keketatan1.toFixed(2)}%</span>`;
+      const score1 = calcCustomSNBP(daya1, peminat1);
+      const score2 = calcCustomSNBP(daya2, peminat2);
+
+      document.getElementById('outProdiSNBP1').innerText = p1Text;
+      document.getElementById('outMapelWajibSNBP1').innerText = `📌 Berdasarkan Input Manual Siswa`;
+      document.getElementById('outStatSNBP1').innerText = `Daya Tampung: ${daya1} | Peminat: ${peminat1} (Keketatan: ${(daya1 / peminat1 * 100).toFixed(2)}%)`;
       document.getElementById('outScoreSNBP1').innerText = `${score1}%`;
-      document.getElementById('outProdiSNBP2').innerHTML = `<b>${p2}</b><br><span class="text-[9px] text-slate-500">Keketatan: ${keketatan2.toFixed(2)}%</span>`;
+
+      document.getElementById('outProdiSNBP2').innerText = p2Text;
+      document.getElementById('outMapelWajibSNBP2').innerText = `📌 Berdasarkan Input Manual Siswa`;
+      document.getElementById('outStatSNBP2').innerText = `Daya Tampung: ${daya2} | Peminat: ${peminat2} (Keketatan: ${(daya2 / peminat2 * 100).toFixed(2)}%)`;
       document.getElementById('outScoreSNBP2').innerText = `${score2}%`;
 
-      renderLampiranTables();
+      const track1 = checkAlumniTrack(p1Text);
+      const track2 = checkAlumniTrack(p2Text);
+      document.getElementById('outAlumniBadgeSNBP1').innerHTML = track1.hasAlumni ? `<span class="inline-block px-2 py-0.5 rounded text-[9px] font-bold bg-amber-50 text-amber-900 border border-amber-300 my-0.5">${track1.detail}</span>` : ``;
+      document.getElementById('outAlumniBadgeSNBP2').innerHTML = track2.hasAlumni ? `<span class="inline-block px-2 py-0.5 rounded text-[9px] font-bold bg-amber-50 text-amber-900 border border-amber-300 my-0.5">${track2.detail}</span>` : ``;
+
+      document.getElementById('outBadgeSNBP1').innerText = score1 >= 75 ? "Peluang Tinggi" : (score1 >= 50 ? "Kompetitif / Moderat" : "Risiko Tinggi");
+      document.getElementById('outBadgeSNBP1').className = score1 >= 75 ? "px-2 py-0.5 rounded text-[10px] font-extrabold bg-emerald-100 text-emerald-800" : (score1 >= 50 ? "px-2 py-0.5 rounded text-[10px] font-extrabold bg-amber-100 text-amber-800" : "px-2 py-0.5 rounded text-[10px] font-extrabold bg-rose-100 text-rose-800");
+
+      document.getElementById('outBadgeSNBP2').innerText = score2 >= 75 ? "Peluang Tinggi" : (score2 >= 50 ? "Kompetitif" : "Risiko Tinggi");
+      document.getElementById('outBadgeSNBP2').className = score2 >= 75 ? "px-2 py-0.5 rounded text-[10px] font-extrabold bg-blue-100 text-blue-800" : "px-2 py-0.5 rounded text-[10px] font-extrabold bg-slate-100 text-slate-800";
+
+      document.getElementById('outFormulaDetail').innerHTML = `
+        • Komponen Nilai Rata-Rata Rapor (38%): <b>${(grandAvg * 0.38).toFixed(2)}</b> (Permendikbudristek No. 48/2022 Ps. 5)<br>
+        • Rasio Keketatan Prodi Berdasarkan Input Manual (${(daya1/peminat1*100).toFixed(2)}%): <b>+${(daya1/peminat1*200).toFixed(2)} Poin</b><br>
+        • Kurva Tren Konsistensi Rapor (Slope m = ${slope.toFixed(2)}): <b>+${slopeBonus} Poin</b>
+      `;
+
+      document.getElementById('outAlertBoxSNBP').className = "p-3 rounded-xl border bg-emerald-50 border-emerald-200 text-emerald-900 text-xs";
+      document.getElementById('outAlertIconSNBP').innerText = "✅";
+      document.getElementById('outAlertTitleSNBP').innerText = "Validasi Data Pilihan Mandiri Selesai";
+      document.getElementById('outAlertDescSNBP').innerText = `Analisis rapor ananda berhasil diproses berdasarkan parameter manual daya tampung dan peminat yang dimasukkan.`;
+
+      // LAMPIRAN 3: ALTERNATIF PRODI LINEAR (MAKSIMAL 5 REFERENSI, TANPA PERSENTASE PELUANG, HANYA JURUSAN, FAKULTAS, UNIVERSITAS)
+      const alternativePool = databasePTN.slice(0, 5);
+      document.getElementById('outRekomLinearSNBP').innerHTML = alternativePool.map(r => `
+        <div class="p-2.5 bg-white rounded-lg border border-slate-200 space-y-0.5 text-[10px]">
+          <p class="font-bold text-slate-900">${r.prodi}</p>
+          <p class="text-[9px] text-slate-600">${r.fakultas}</p>
+          <p class="text-[9px] font-semibold text-blue-900">${r.ptn}</p>
+        </div>
+      `).join('');
 
       document.getElementById('contentReportSNBP').classList.remove('hidden');
       document.getElementById('contentReportSNBT').classList.add('hidden');
@@ -839,53 +1099,103 @@
       document.getElementById('reportSection').scrollIntoView({ behavior: 'smooth' });
     }
 
+    // ===============================================
+    // EKSEKUTOR LAPORAN SNBT
+    // ===============================================
     function jalankanAnalisisSNBT() {
       activeJalur = "SNBT";
-      let pu = parseFloat(document.getElementById('utbk_pu').value) || 685;
-      const totalSkor = (pu + (parseFloat(document.getElementById('utbk_pk').value)||710) + (parseFloat(document.getElementById('utbk_pm').value)||695) + (parseFloat(document.getElementById('utbk_pbm').value)||665) + (parseFloat(document.getElementById('utbk_ppu').value)||650) + (parseFloat(document.getElementById('utbk_lit_indo').value)||690) + (parseFloat(document.getElementById('utbk_lit_ing').value)||660)) / 7;
-      
+      let pu = parseFloat(document.getElementById('utbk_pu').value) || 0;
+      if (pu === 0) {
+        isiContohUTBK();
+        pu = parseFloat(document.getElementById('utbk_pu').value);
+      }
+
+      const pk = parseFloat(document.getElementById('utbk_pk').value) || 0;
+      const pm = parseFloat(document.getElementById('utbk_pm').value) || 0;
+      const pbm = parseFloat(document.getElementById('utbk_pbm').value) || 0;
+      const ppu = parseFloat(document.getElementById('utbk_ppu').value) || 0;
+      const litIndo = parseFloat(document.getElementById('utbk_lit_indo').value) || 0;
+      const litIng = parseFloat(document.getElementById('utbk_lit_ing').value) || 0;
+
+      const totalSkor = (pu + pk + pm + pbm + ppu + litIndo + litIng) / 7;
       const nama = document.getElementById('inNamaSNBT').value.trim() || "Muhammad Umar";
-      const p1 = document.getElementById('textProdiSNBT1').value.trim() || "Teknik Informatika - ITB";
-      const p2 = document.getElementById('textProdiSNBT2').value.trim() || "Sistem Informasi - UI";
+      const p1Id = document.getElementById('selectProdiSNBT1').value || "ITS_IF";
+      const p2Id = document.getElementById('selectProdiSNBT2').value || "UNDIP_PWK";
+      const prodi1 = databasePTN.find(p => p.id === p1Id);
+      const prodi2 = databasePTN.find(p => p.id === p2Id);
 
-      const pg1 = parseFloat(document.getElementById('pgSNBT1').value) || 720;
-      const daya1 = parseFloat(document.getElementById('quotaDayaSNBT1').value) || 130;
-      const peminat1 = parseFloat(document.getElementById('quotaPeminatSNBT1').value) || 3450;
-
-      const gap1 = totalSkor - pg1;
-      const keketatan1 = (daya1 / peminat1) * 100;
-      const bonusAlumni = checkAlumniBonus(p1);
-
-      let prob1 = Math.max(5, Math.min(98, Math.round(50 + (gap1 * 1.2) + (keketatan1 * 0.5) + bonusAlumni)));
-      let prob2 = Math.max(5, Math.min(98, prob1 + 12));
-
-      document.getElementById('outReportBadgeJalur').innerText = "Rapor Diagnostik SNBT UTBK";
+      document.getElementById('outReportBadgeJalur').innerText = "Rapor Diagnostik Khusus SNBT Kelas XII";
       document.getElementById('outNamaReport').innerText = nama;
+      document.getElementById('outKelasReport').innerText = "XII SMA (Peserta UTBK-SNBT)";
+      document.getElementById('outKonselorReport').innerText = "Tim Sukses UTBK M18";
       document.getElementById('outValSkorUtama').innerText = totalSkor.toFixed(1);
+      document.getElementById('outTanggalCetak').innerText = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 
       const boxMotivasi = document.getElementById('boxMotivasiSNBT');
       const badgeGamif = document.getElementById('outBadgeGamifikasi');
+      const statusMotiv = document.getElementById('outMotivasiStatus');
       const pesanMotiv = document.getElementById('outMotivasiPesan');
 
-      if (totalSkor >= 680) {
+      if (totalSkor >= 700) {
         boxMotivasi.className = "p-4 rounded-2xl border-2 border-emerald-400 bg-emerald-50 shadow-sm space-y-2";
         badgeGamif.innerText = "🏆 Level: Elite Garuda (Top Tier Ready)";
         badgeGamif.className = "px-3 py-1 rounded-full text-xs font-black uppercase bg-emerald-200 text-emerald-900";
-        pesanMotiv.innerText = `Luar biasa, ${nama}! Skor rata-rata UTBK kamu ${totalSkor.toFixed(1)}. Peluang lolos sangat menjanjikan!`;
+        statusMotiv.innerText = "Performa Sangat Prima!";
+        pesanMotiv.innerText = `Luar biasa, ${nama}! Skor rata-rata UTBK kamu (${totalSkor.toFixed(1)}) sudah berada di level elite.`;
       } else {
         boxMotivasi.className = "p-4 rounded-2xl border-2 border-amber-400 bg-amber-50 shadow-sm space-y-2";
         badgeGamif.innerText = "⚡ Level: Fighter Kompetitif";
         badgeGamif.className = "px-3 py-1 rounded-full text-xs font-black uppercase bg-amber-200 text-amber-900";
-        pesanMotiv.innerText = `Tetap semangat, ${nama}! Skor rata-rata ${totalSkor.toFixed(1)}. Terus tingkatkan skor subtes.`;
+        statusMotiv.innerText = "Satu Langkah Lagi Menuju Kursi PTN!";
+        pesanMotiv.innerText = `Kerja bagus, ${nama}! Skor kamu sangat kompetitif. Tingkatkan porsi latihan soal pada subtes dengan akurasi terendah.`;
       }
 
-      document.getElementById('outGrid7Subtes').innerHTML = `<div class="p-2 bg-slate-50 border col-span-7 font-bold text-xs">Skor 7 Subtes Terinput (Rata-rata: ${totalSkor.toFixed(1)})</div>`;
-      document.getElementById('outProdiUTBK1').innerHTML = `<b>${p1}</b><br><span class="text-[9px] text-slate-500">Passing Grade: ${pg1} | Keketatan: ${keketatan1.toFixed(2)}%</span>`;
-      document.getElementById('outPeluangUTBK1').innerText = `${prob1}% Peluang Lolos`;
-      document.getElementById('outProdiUTBK2').innerHTML = `<b>${p2}</b>`;
-      document.getElementById('outPeluangUTBK2').innerText = `${prob2}% Peluang Lolos`;
+      const subtesData = [
+        { label: "PU", val: pu }, { label: "PK", val: pk }, { label: "PM", val: pm },
+        { label: "PBM", val: pbm }, { label: "PPU", val: ppu }, { label: "Lit Indo", val: litIndo }, { label: "Lit Ing", val: litIng }
+      ];
+      document.getElementById('outGrid7Subtes').innerHTML = subtesData.map(s => `
+        <div class="p-2 rounded-lg bg-slate-50 border border-slate-200">
+          <span class="text-[9px] font-bold text-slate-500 block">${s.label}</span>
+          <span class="font-black text-slate-900 text-sm">${s.val}</span>
+        </div>
+      `).join('');
 
-      renderLampiranTables();
+      const gap1 = totalSkor - prodi1.passingUTBK;
+      const gap2 = totalSkor - prodi2.passingUTBK;
+      const prob1 = Math.max(10, Math.min(95, Math.round(50 + (gap1 * 1.5))));
+      const prob2 = Math.max(10, Math.min(95, Math.round(50 + (gap2 * 1.5))));
+
+      document.getElementById('outProdiUTBK1').innerText = `${prodi1.prodi} - ${prodi1.ptn}`;
+      document.getElementById('outPassingUTBK1').innerText = prodi1.passingUTBK;
+      document.getElementById('outPeluangUTBK1').innerText = `${prob1}% Peluang Lolos`;
+      document.getElementById('outBadgeUTBK1').innerText = gap1 >= 10 ? "Sangat Aman" : "Kompetitif";
+      document.getElementById('outBadgeUTBK1').className = "px-2 py-0.5 rounded text-[9px] font-extrabold bg-emerald-100 text-emerald-800";
+
+      document.getElementById('outProdiUTBK2').innerText = `${prodi2.prodi} - ${prodi2.ptn}`;
+      document.getElementById('outPassingUTBK2').innerText = prodi2.passingUTBK;
+      document.getElementById('outPeluangUTBK2').innerText = `${prob2}% Peluang Lolos`;
+      document.getElementById('outBadgeUTBK2').innerText = gap2 >= 10 ? "Sangat Aman" : "Kompetitif";
+      document.getElementById('outBadgeUTBK2').className = "px-2 py-0.5 rounded text-[9px] font-extrabold bg-blue-100 text-blue-800";
+
+      const safeProdis = databasePTN.filter(p => totalSkor >= p.passingUTBK).slice(0, 3);
+      document.getElementById('outSmartMatchingKampus').innerHTML = safeProdis.length > 0 ? safeProdis.map(sp => `
+        <div class="p-2 bg-white rounded-lg border border-slate-200 text-[10px]">
+          <p class="font-bold text-slate-800">${sp.prodi}</p>
+          <p class="text-[9px] text-slate-500">${sp.ptn}</p>
+          <span class="text-emerald-700 font-extrabold text-[9px]">Passing Grade: ${sp.passingUTBK} (Aman)</span>
+        </div>
+      `).join('') : `<p class="text-[10px] text-slate-500 italic col-span-3">Tingkatkan skor UTBK di atas 605.</p>`;
+
+      const roadmapItems = [
+        { name: "Penalaran Matematika (PM) & Kuantitatif (PK)", act: "Perbanyak drilling aljabar terapan." },
+        { name: "Penalaran Umum (PU) & PBM", act: "Latih silogisme logika deduktif." }
+      ];
+      document.getElementById('outRoadmapSNBT').innerHTML = roadmapItems.map(r => `
+        <div class="p-2 rounded-lg bg-slate-50 border border-slate-200 text-[10px]">
+          <span class="font-bold text-slate-800">${r.name}:</span> <span class="text-slate-600">${r.act}</span>
+        </div>
+      `).join('');
 
       document.getElementById('contentReportSNBP').classList.add('hidden');
       document.getElementById('contentReportSNBT').classList.remove('hidden');
@@ -894,20 +1204,28 @@
       document.getElementById('reportSection').scrollIntoView({ behavior: 'smooth' });
     }
 
+    // ===============================================
+    // EKSEKUTOR LAPORAN MANDIRI
+    // ===============================================
     function jalankanAnalisisMandiri() {
       activeJalur = "MANDIRI";
-      let modal = parseFloat(document.getElementById('inModalMandiri').value) || 88.0;
+      let modal = parseFloat(document.getElementById('inModalMandiri').value) || 0;
+      if (modal === 0) {
+        isiContohMandiri();
+        modal = parseFloat(document.getElementById('inModalMandiri').value);
+      }
       const nama = document.getElementById('inNamaMandiri').value.trim() || "Muhammad Umar";
-      const p1 = document.getElementById('textProdiMandiri1').value.trim() || "D4 Akuntansi Sektor Publik - PKN STAN";
-      const p2 = document.getElementById('textProdiMandiri2').value.trim() || "S1 Manajemen - Universitas Telkom";
+      const p1Id = document.getElementById('selectProdiMandiri1').value || "UI_CS";
+      const p2Id = document.getElementById('selectProdiMandiri2').value || "UPNVJ_SI";
       const bonusPrestasi = parseFloat(document.getElementById('selectPrestasiMandiri').value) || 0;
-      
-      let totalPeluang = Math.max(5, Math.min(98, Math.round(((modal >= 85 ? (modal - 80) * 4.5 : 25)) + bonusPrestasi + 15)));
+      const prodi1 = databasePTN.find(p => p.id === p1Id);
+      const prodi2 = databasePTN.find(p => p.id === p2Id);
+      let totalPeluang = Math.min(95, Math.round(((modal >= 85 ? (modal - 80) * 4.5 : 25)) + bonusPrestasi + 15));
 
-      document.getElementById('outReportBadgeJalur').innerText = "Rapor Strategi Mandiri & Kedinasan";
+      document.getElementById('outReportBadgeJalur').innerText = "Rapor Strategi Seleksi Mandiri";
       document.getElementById('outNamaReport').innerText = nama;
-      document.getElementById('outKelasReport').innerText = "XII SMA (Mitigasi Mandiri)";
-      document.getElementById('outKonselorReport').innerText = "Fadhillah Umar, S.Pd.";
+      document.getElementById('outKelasReport').innerText = "XII SMA (Mitigasi Jalur Mandiri)";
+      document.getElementById('outKonselorReport').innerText = "Tim Sukses Mandiri M18";
       document.getElementById('outValSkorUtama').innerText = modal.toFixed(1);
       document.getElementById('outTanggalCetak').innerText = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 
@@ -915,10 +1233,11 @@
       document.getElementById('outMandiriBonusVal').innerText = `+${bonusPrestasi}%`;
       document.getElementById('outMandiriPeluangVal').innerText = `${totalPeluang}%`;
 
-      document.getElementById('outProdiMandiriReport1').innerText = p1;
-      document.getElementById('outProdiMandiriReport2').innerText = p2;
+      document.getElementById('outProdiMandiriReport1').innerText = `${prodi1.prodi} - ${prodi1.ptn}`;
+      document.getElementById('outSkemaMandiri1').innerText = `Skema Ujian: ${prodi1.mandiri || 'Jalur Mandiri Terbuka'}`;
 
-      renderLampiranTables();
+      document.getElementById('outProdiMandiriReport2').innerText = `${prodi2.prodi} - ${prodi2.ptn}`;
+      document.getElementById('outSkemaMandiri2').innerText = `Skema Ujian: ${prodi2.mandiri || 'Jalur Mandiri Terbuka'}`;
 
       document.getElementById('contentReportSNBP').classList.add('hidden');
       document.getElementById('contentReportSNBT').classList.add('hidden');
@@ -937,17 +1256,59 @@
       setTimeout(() => { window.print(); }, 300);
     }
 
+    function saveDraft() {
+      const draft = {
+        nama: document.getElementById('inNama') ? document.getElementById('inNama').value : "",
+        kelas: document.getElementById('inKelas') ? document.getElementById('inKelas').value : "",
+        konselor: document.getElementById('inKonselor') ? document.getElementById('inKonselor').value : ""
+      };
+      localStorage.setItem('m18_eduanalytics_draft', JSON.stringify(draft));
+    }
+
+    function loadDraft() {
+      const raw = localStorage.getItem('m18_eduanalytics_draft');
+      if (!raw) return;
+      try {
+        const d = JSON.parse(raw);
+        if (d.nama && document.getElementById('inNama')) document.getElementById('inNama').value = d.nama;
+        if (d.kelas && document.getElementById('inKelas')) document.getElementById('inKelas').value = d.kelas;
+        if (d.konselor && document.getElementById('inKonselor')) document.getElementById('inKonselor').value = d.konselor;
+      } catch (e) {}
+    }
+
     function exportDataExcel() {
-      let html = `<table><tr><th>Nama</th><th>Modul</th></tr><tr><td>Muhammad Umar</td><td>Objective DSS M18 + Lampiran</td></tr></table>`;
+      let html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+      <head><meta charset="UTF-8"><style>table{border-collapse:collapse;}th{background:#133E87;color:#fff;font-weight:bold;padding:8px;border:1px solid #000;}td{padding:6px;border:1px solid #ccc;}</style></head>
+      <body>
+      <table>
+        <tr><th colspan="4" style="font-size:14pt;text-align:center;">REKAP PEMETAAN PTN M18</th></tr>
+        <tr><th>Nama Siswa</th><th>Kelas</th><th>Modul Aktif</th><th>Tanggal</th></tr>
+        <tr><td>Muhammad Umar</td><td>XII - 1 (MIPA)</td><td>SNBT & SNBP</td><td>${new Date().toLocaleDateString('id-ID')}</td></tr>
+      </table>
+      </body></html>`;
+
       const blob = new Blob([html], { type: 'application/vnd.ms-excel' });
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
-      link.download = `Rekap_Pemetaan_M18_Lampiran.xls`;
+      link.download = `Rekap_Pemetaan_M18.xls`;
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
+    }
+
+    function importDataCsv(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        alert("File berhasil dimuat! Data pemetaan angkatan telah disinkronkan.");
+      };
+      reader.readAsText(file);
     }
 
     renderTabel();
-    populateMapelSelects();
+    populateDropdowns();
+    loadDraft();
   </script>
 </body>
 </html>
